@@ -4,19 +4,18 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class SWAPICharactersRepository (
+class SWAPICharacterDetailsRepository(
     private val service: SWAPIService,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
-){
-    suspend fun loadSWAPICharacters(
-        page: Int,
-        limit: Int,
-    ): Result<List<SWAPICharacter>> =
+) {
+    suspend fun loadSWAPICharacterDetails(
+        id: Int,
+    ): Result<CharacterDetails?> =
         withContext(ioDispatcher) {
             try {
-                val response = service.loadSWAPICharacters(page, limit)
+                val response = service.loadSWAPICharacterDetails(id)
                 if (response.isSuccessful) {
-                    Result.success(response.body()?.results ?: listOf())
+                    Result.success(response.body())
                 } else {
                     Result.failure(Exception(response.errorBody()?.string()))
                 }
