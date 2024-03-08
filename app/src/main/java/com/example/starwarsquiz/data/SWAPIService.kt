@@ -1,5 +1,6 @@
 package com.example.starwarsquiz.data
 
+import com.squareup.moshi.Moshi
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
@@ -22,9 +23,12 @@ interface SWAPIService {
     companion object {
         private const val BASE_URL = "https://www.swapi.tech/api/"
         fun create(): SWAPIService {
+            val moshi = Moshi.Builder()
+                .add(SWAPICharacterInfoAdapter())
+                .build()
             return Retrofit.Builder()
                 .baseUrl(BASE_URL)
-                .addConverterFactory(MoshiConverterFactory.create())
+                .addConverterFactory(MoshiConverterFactory.create(moshi))
                 .build()
                 .create(SWAPIService::class.java)
         }

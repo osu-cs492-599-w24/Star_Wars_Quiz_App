@@ -5,17 +5,18 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.starwarsquiz.data.CharacterDetails
 import com.example.starwarsquiz.data.SWAPICharacter
-import com.example.starwarsquiz.data.SWAPICharactersRepository
+import com.example.starwarsquiz.data.SWAPICharacterDetailsRepository
 import com.example.starwarsquiz.data.SWAPIService
 import kotlinx.coroutines.launch
 
-class SWAPICharacterViewModel : ViewModel() {
-    private val repository = SWAPICharactersRepository(SWAPIService.create())
+class SWAPICharacterDetailsViewModel : ViewModel() {
+    private val repository = SWAPICharacterDetailsRepository(SWAPIService.create())
 
-    private val _characterResults = MutableLiveData<List<SWAPICharacter>?>(null)
+    private val _characterDetails = MutableLiveData<CharacterDetails?>(null)
 
-    val characterResults = _characterResults
+    val characterDetails = _characterDetails
 
     private val _error = MutableLiveData<Throwable?>(null)
 
@@ -25,15 +26,14 @@ class SWAPICharacterViewModel : ViewModel() {
 
     val loading: LiveData<Boolean> = _loading
 
-    fun loadSWAPICharacters(page: Int, limit: Int) {
+    fun loadSWAPICharactersDetails(id: Int) {
         viewModelScope.launch {
             _loading.value = true
-            val result = repository.loadSWAPICharacters(page, limit)
+            val result = repository.loadSWAPICharacterDetails(id)
             _loading.value = false
             _error.value = result.exceptionOrNull()
-            _characterResults.value = result.getOrNull()
-            Log.d("ViewModel", "Character: ${_characterResults.value}" )
+            _characterDetails.value = result.getOrNull()
+            Log.d("ViewModel", "Details: ${_characterDetails.value}" )
         }
     }
-
 }

@@ -1,5 +1,6 @@
 package com.example.starwarsquiz.data
 
+import android.util.Log
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -16,6 +17,7 @@ class SWAPICharactersRepository (
             try {
                 val response = service.loadSWAPICharacters(page, limit)
                 if (response.isSuccessful) {
+                    Log.d("Repository", "Characters ${response.body()}")
                     Result.success(response.body()?.results ?: listOf())
                 } else {
                     Result.failure(Exception(response.errorBody()?.string()))

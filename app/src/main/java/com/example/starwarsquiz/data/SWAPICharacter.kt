@@ -4,7 +4,7 @@ import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
 data class SWAPICharacter(
-    val uid: Int,
+    val uid: String,
     val name: String,
     val url: String,
 )
