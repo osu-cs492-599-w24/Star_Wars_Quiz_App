@@ -1,14 +1,10 @@
-package com.example.starwarsquiz
+package com.example.starwarsquiz.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.example.starwarsquiz.data.SWAPICharacterResults
+import com.example.starwarsquiz.R
 import com.example.starwarsquiz.data.SWAPIService
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
     private val swapiService = SWAPIService.create()
