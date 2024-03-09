@@ -17,17 +17,17 @@ data class CharacterDetails(
     val homeworldUrl: String,
 )
 @JsonClass(generateAdapter = true)
-data class SWAPIResultJson(
-    val result: SWAPIPropertiesJson
+data class SWAPICharacterResultJson(
+    val result: SWAPICharacterPropertiesJson
 )
 
 @JsonClass(generateAdapter = true)
-data class SWAPIPropertiesJson(
-    val properties: SWAPIDetailsJson
+data class SWAPICharacterPropertiesJson(
+    val properties: SWAPICharacterDetailsJson
 )
 
 @JsonClass(generateAdapter = true)
-data class SWAPIDetailsJson(
+data class SWAPICharacterDetailsJson(
     val height: String,
     val mass: String,
     val hair_color: String,
@@ -41,7 +41,7 @@ data class SWAPIDetailsJson(
 
 class SWAPICharacterInfoAdapter {
     @FromJson
-    fun characterDetailsFromJson(characterDetails: SWAPIResultJson) = CharacterDetails(
+    fun characterDetailsFromJson(characterDetails: SWAPICharacterResultJson) = CharacterDetails(
         height = characterDetails.result.properties.height.toInt(),
         mass = characterDetails.result.properties.mass.toInt(),
         hairColor = characterDetails.result.properties.hair_color,

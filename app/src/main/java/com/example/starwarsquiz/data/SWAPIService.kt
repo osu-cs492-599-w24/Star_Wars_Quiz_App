@@ -13,18 +13,29 @@ interface SWAPIService {
     suspend fun loadSWAPICharacters(
         @Query("page") page: Int = 1,
         @Query("limit") limit: Int = 10
-    ): Response<SWAPICharacterResults>
+    ): Response<SWAPICharacterList>
+    @GET ("planets")
+    suspend fun loadSWAPIPlanets(
+        @Query("page") page: Int = 1,
+        @Query("limit") limit: Int = 10
+    ): Response<SWAPIPlanetList>
 
     @GET("people/{id}")
     suspend fun loadSWAPICharacterDetails(
         @Path("id") uid: Int,
     ) : Response<CharacterDetails>
 
+    @GET("planets/{id}")
+    suspend fun loadSWAPIPlanetDetails(
+        @Path("id") uid: Int,
+    ) : Response<PlanetDetails>
+
     companion object {
         private const val BASE_URL = "https://www.swapi.tech/api/"
         fun create(): SWAPIService {
             val moshi = Moshi.Builder()
                 .add(SWAPICharacterInfoAdapter())
+                .add(SWAPIPlanetInfoAdapter())
                 .build()
             return Retrofit.Builder()
                 .baseUrl(BASE_URL)
