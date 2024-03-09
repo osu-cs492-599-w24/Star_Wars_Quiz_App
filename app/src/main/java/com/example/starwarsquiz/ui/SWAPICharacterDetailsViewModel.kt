@@ -33,7 +33,7 @@ class SWAPICharacterDetailsViewModel : ViewModel() {
             _loading.value = false
             _error.value = result.exceptionOrNull()
             _characterDetails.value = result.getOrNull()
-            Log.d("ViewModel", "Details: ${_characterDetails.value}" )
+            Log.d("ViewModel", "Character Details: ${_characterDetails.value}" )
         }
     }
 }

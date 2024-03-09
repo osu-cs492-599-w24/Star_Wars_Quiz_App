@@ -34,7 +34,7 @@ class SWAPIPlanetViewModel : ViewModel() {
             _loading.value = false
             _error.value = result.exceptionOrNull()
             _planetList.value = result.getOrNull()
-            Log.d("ViewModel", "Character: ${_planetList.value}" )
+            Log.d("ViewModel", "Planet List: ${_planetList.value}" )
         }
     }
 

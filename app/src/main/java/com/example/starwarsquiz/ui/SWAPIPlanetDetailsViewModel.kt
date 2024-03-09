@@ -35,7 +35,7 @@ class SWAPIPlanetDetailsViewModel : ViewModel() {
             _loading.value = false
             _error.value = result.exceptionOrNull()
             _planetDetails.value = result.getOrNull()
-            Log.d("ViewModel", "Details: ${_planetDetails.value}" )
+            Log.d("ViewModel", "Planet Details: ${_planetDetails.value}" )
         }
     }
 }

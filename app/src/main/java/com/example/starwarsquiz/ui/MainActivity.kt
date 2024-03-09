@@ -17,11 +17,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val swapiCharacterTV: TextView = findViewById(R.id.tv_swapi_character)
+        /**
+         * Check the Network Inspector and perform a rotation to view that these API calls
+         * are successful and look at the Logcat to see that the calls are being parsed
+         * under the tag "ViewModel".
+         */
         resultViewModel.loadSWAPICharacters(1, 10)
         characterDetailsViewModel.loadSWAPICharactersDetails(1)
         planetsViewModel.loadSWAPIPlanets(1, 10)
         planetDetailsViewModel.loadSWAPIPlanetDetails(1)
-        swapiCharacterTV.text = "character"
     }
 }

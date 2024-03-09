@@ -13,9 +13,9 @@ import kotlinx.coroutines.launch
 class SWAPICharacterViewModel : ViewModel() {
     private val repository = SWAPICharactersRepository(SWAPIService.create())
 
-    private val _characterResults = MutableLiveData<List<SWAPICharacter>?>(null)
+    private val _characterList = MutableLiveData<List<SWAPICharacter>?>(null)
 
-    val characterResults = _characterResults
+    val characterResults = _characterList
 
     private val _error = MutableLiveData<Throwable?>(null)
 
@@ -31,8 +31,8 @@ class SWAPICharacterViewModel : ViewModel() {
             val result = repository.loadSWAPICharacters(page, limit)
             _loading.value = false
             _error.value = result.exceptionOrNull()
-            _characterResults.value = result.getOrNull()
-            Log.d("ViewModel", "Character: ${_characterResults.value}" )
+            _characterList.value = result.getOrNull()
+            Log.d("ViewModel", "Character List: ${_characterList.value}" )
         }
     }
 
