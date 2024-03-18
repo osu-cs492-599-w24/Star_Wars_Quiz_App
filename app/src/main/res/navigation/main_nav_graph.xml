@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_nav_graph"
+    app:startDestination="@id/landing_page">
+
+    <fragment
+        android:id="@+id/landing_page"
+        android:name="com.example.starwarsquiz.ui.LandingPageFragment">
+    </fragment>
+
+
+</navigation>
