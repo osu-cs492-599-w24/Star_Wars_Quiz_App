@@ -8,6 +8,12 @@
     <fragment
         android:id="@+id/landing_page"
         android:name="com.example.starwarsquiz.ui.LandingPageFragment">
+        <action
+            android:id="@+id/navigate_to_quiz_question_mc"
+            app:destination="@id/quiz_question_mc" />
+        <action
+            android:id="@+id/navigate_to_quiz_question_fr"
+            app:destination="@id/quiz_question_fr" />
     </fragment>
 
     <fragment
@@ -16,6 +22,15 @@
         <argument
             android:name="questionContents"
             app:argType="com.example.starwarsquiz.data.QuestionContents"/>
+        <action
+            android:id="@+id/navigate_to_quiz_question_mc"
+            app:destination="@id/quiz_question_mc" />
+        <action
+            android:id="@+id/navigate_to_quiz_question_fr"
+            app:destination="@id/quiz_question_fr" />
+        <action
+            android:id="@+id/navigate_to_quiz_results"
+            app:destination="@id/quiz_results" />
     </fragment>
 
     <fragment
@@ -24,12 +39,30 @@
         <argument
             android:name="questionContents"
             app:argType="com.example.starwarsquiz.data.QuestionContents"/>
+        <action
+            android:id="@+id/navigate_to_quiz_question_mc"
+            app:destination="@id/quiz_question_mc" />
+        <action
+            android:id="@+id/navigate_to_quiz_question_fr"
+            app:destination="@id/quiz_question_fr" />
+        <action
+            android:id="@+id/navigate_to_quiz_results"
+            app:destination="@id/quiz_results" />
     </fragment>
 
 <!--pass args as needed eg. video-->
     <fragment
         android:id="@+id/quiz_results"
         android:name="com.example.starwarsquiz.ui.QuizResultsFragment">
+        <action
+            android:id="@+id/navigate_to_quiz_question_mc"
+            app:destination="@id/quiz_question_mc" />
+        <action
+            android:id="@+id/navigate_to_quiz_question_fr"
+            app:destination="@id/quiz_question_fr" />
+        <action
+            android:id="@+id/navigate_to_landing_page"
+            app:destination="@id/landing_page" />
     </fragment>
 
 </navigation>
