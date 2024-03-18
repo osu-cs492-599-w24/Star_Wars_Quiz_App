@@ -13,13 +13,20 @@
     <fragment
         android:id="@+id/quiz_question_mc"
         android:name="com.example.starwarsquiz.ui.QuizQuestionMCFragment">
+        <argument
+            android:name="questionContents"
+            app:argType="com.example.starwarsquiz.data.QuestionContents"/>
     </fragment>
 
     <fragment
         android:id="@+id/quiz_question_fr"
         android:name="com.example.starwarsquiz.ui.QuizQuestionFRFragment">
+        <argument
+            android:name="questionContents"
+            app:argType="com.example.starwarsquiz.data.QuestionContents"/>
     </fragment>
 
+<!--pass args as needed eg. video-->
     <fragment
         android:id="@+id/quiz_results"
         android:name="com.example.starwarsquiz.ui.QuizResultsFragment">
