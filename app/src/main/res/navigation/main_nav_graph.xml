@@ -3,12 +3,16 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main_nav_graph"
-    app:startDestination="@id/landing_page">
+    app:startDestination="@id/quiz_question_mc">
 
     <fragment
         android:id="@+id/landing_page"
         android:name="com.example.starwarsquiz.ui.LandingPageFragment">
     </fragment>
 
+    <fragment
+        android:id="@+id/quiz_question_mc"
+        android:name="com.example.starwarsquiz.ui.QuizQuestionMCFragment">
+    </fragment>
 
 </navigation>

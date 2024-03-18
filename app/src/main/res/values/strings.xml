@@ -2,5 +2,13 @@
     <string name="app_name">Star Wars\nQuiz</string>
 
     <string name="start">Start Quiz</string>
+    <string name="previous">previous</string>
+    <string name="next">next</string>
+    <string name="submit">submit</string>
+
+    <string name="quiz_num_questions">/10</string>
+    <string name="quiz_score_label">Score: </string>
+
+    <string name="question_1">Sample Question Placeholder</string>
 
 </resources>
