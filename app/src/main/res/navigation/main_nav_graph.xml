@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main_nav_graph"
-    app:startDestination="@id/quiz_question_fr">
+    app:startDestination="@id/landing_page">
 
     <fragment
         android:id="@+id/landing_page"
@@ -18,6 +18,11 @@
     <fragment
         android:id="@+id/quiz_question_fr"
         android:name="com.example.starwarsquiz.ui.QuizQuestionFRFragment">
+    </fragment>
+
+    <fragment
+        android:id="@+id/quiz_results"
+        android:name="com.example.starwarsquiz.ui.QuizResultsFragment">
     </fragment>
 
 </navigation>

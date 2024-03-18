@@ -101,7 +101,8 @@
             android:layout_gravity="center_vertical|end"
             android:text="@string/next"
             android:textSize="20sp"
-            android:padding="15dp"
+            android:paddingVertical="15dp"
+            android:paddingHorizontal="50dp"
             android:visibility="invisible"/>
 
         <Button
@@ -111,7 +112,8 @@
             android:layout_gravity="center_vertical|end"
             android:text="@string/submit"
             android:textSize="20sp"
-            android:padding="15dp" />
+            android:paddingVertical="15dp"
+            android:paddingHorizontal="50dp" />
 
     </FrameLayout>
 

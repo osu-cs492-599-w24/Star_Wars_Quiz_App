@@ -5,11 +5,17 @@
     <string name="previous">previous</string>
     <string name="next">next</string>
     <string name="submit">submit</string>
+    <string name="home">home</string>
+    <string name="restart">restart</string>
 
     <string name="quiz_num_questions">/10</string>
     <string name="quiz_score_label">Score: </string>
+    <string name="quiz_points_label">pts</string>
+    <string name="quiz_highest_score_label">Highest Score: </string>
 
     <string name="question_1">Sample Question Placeholder</string>
     <string name="fr_answer_placeholder">Type Answer</string>
+
+    <string name="label_results">Results</string>
 
 </resources>
