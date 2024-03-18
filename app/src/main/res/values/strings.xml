@@ -10,5 +10,6 @@
     <string name="quiz_score_label">Score: </string>
 
     <string name="question_1">Sample Question Placeholder</string>
+    <string name="fr_answer_placeholder">Type Answer</string>
 
 </resources>
