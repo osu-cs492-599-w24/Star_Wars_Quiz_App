@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--suppress NavigationFile -->
 <navigation
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -52,10 +53,13 @@
             app:destination="@id/quiz_results" />
     </fragment>
 
-<!--pass args as needed eg. video-->
     <fragment
         android:id="@+id/quiz_results"
         android:name="com.example.starwarsquiz.ui.QuizResultsFragment">
+        <argument
+            android:name="quizResults"
+            app:argType="integer"
+            android:defaultValue="0"/>
         <action
             android:id="@+id/navigate_to_quiz_question_mc"
             app:destination="@id/quiz_question_mc" />

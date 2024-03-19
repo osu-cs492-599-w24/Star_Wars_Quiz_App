@@ -34,35 +34,27 @@
             android:paddingHorizontal="16dp"
             android:textSize="60sp"/>
 
-        <TextView
-            android:id="@+id/tv_points_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?attr/textAppearanceHeadline5"
-            android:paddingVertical="32dp"
-            android:paddingHorizontal="16dp"
-            android:textSize="60sp"
-            android:text="@string/quiz_points_label"/>
+
 
     </LinearLayout>
+
+    <VideoView
+        android:id="@+id/vv_reward_video"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/results_final_score"
+        android:layout_centerHorizontal="true"
+        android:padding="16dp" />
+
 
     <LinearLayout
         android:id="@+id/results_highest_score"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_below="@id/results_final_score"
+        android:layout_below="@id/vv_reward_video"
         android:gravity="center_horizontal"
         android:layout_centerHorizontal="true">
-
-        <TextView
-            android:id="@+id/tv_highest_score_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?attr/textAppearanceHeadline5"
-            android:paddingVertical="32dp"
-            android:paddingHorizontal="16dp"
-            android:text="@string/quiz_highest_score_label"/>
 
         <TextView
             android:id="@+id/tv_highest_score"

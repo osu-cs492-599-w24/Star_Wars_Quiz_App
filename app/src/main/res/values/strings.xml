@@ -10,7 +10,7 @@
 
     <string name="quiz_num_questions">/10</string>
     <string name="quiz_score_label">Score: </string>
-    <string name="quiz_points_label">pts</string>
+    <string name="quiz_points_label">points</string>
     <string name="quiz_highest_score_label">Highest Score: </string>
 
     <string name="question_1">Sample Question Placeholder</string>
@@ -18,5 +18,8 @@
     <string name="fr_answer_placeholder">Type Answer</string>
 
     <string name="label_results">Results</string>
+    <string name="your_score">%1$s points</string>
+
+    <string name="highest_score">Highest score: %1$s points</string>
 
 </resources>
