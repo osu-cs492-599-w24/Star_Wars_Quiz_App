@@ -18,5 +18,8 @@
     <string name="fr_answer_placeholder">Type Answer</string>
 
     <string name="label_results">Results</string>
+    <string name="your_score">Your score: %1$s pts</string>
+
+    <string name="highest_score">Highest score: %1$s pts</string>
 
 </resources>

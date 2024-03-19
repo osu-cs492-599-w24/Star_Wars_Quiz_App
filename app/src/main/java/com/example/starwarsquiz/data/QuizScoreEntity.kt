@@ -6,7 +6,7 @@ import java.io.Serializable
 
 @Entity
 data class QuizScoreEntity(
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     val runId: Int,
     val score: Int
 ) : Serializable
