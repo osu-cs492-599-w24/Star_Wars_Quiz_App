@@ -19,6 +19,7 @@
     <fragment
         android:id="@+id/quiz_question_mc"
         android:name="com.example.starwarsquiz.ui.QuizQuestionMCFragment">
+<!--        Uncomment when ready to pass question contents-->
 <!--        <argument-->
 <!--            android:name="questionContents"-->
 <!--            app:argType="com.example.starwarsquiz.data.QuestionContents"/>-->
@@ -36,6 +37,7 @@
     <fragment
         android:id="@+id/quiz_question_fr"
         android:name="com.example.starwarsquiz.ui.QuizQuestionFRFragment">
+<!--        Uncomment when ready to pass question contents-->
 <!--        <argument-->
 <!--            android:name="questionContents"-->
 <!--            app:argType="com.example.starwarsquiz.data.QuestionContents"/>-->
