@@ -21,6 +21,7 @@
     <string name="your_score">%1$s points</string>
 
     <string name="share_text">I Got %1$s/10 on Star Wars Quizzer!!!</string>
+    <string name="share_button_description">Button for sharing score to other apps</string>
 
     <string name="highest_score">Highest score: %1$s points</string>
 
