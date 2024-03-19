@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?attr/textAppearanceHeadline5"
         android:paddingVertical="32dp"
-        android:paddingHorizontal="16dp"/>
+        android:paddingHorizontal="16dp"
+        android:background="@drawable/view_border"/>
 
 </com.google.android.material.card.MaterialCardView>

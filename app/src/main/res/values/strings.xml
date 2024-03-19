@@ -14,6 +14,7 @@
     <string name="quiz_highest_score_label">Highest Score: </string>
 
     <string name="question_1">Sample Question Placeholder</string>
+    <string name="answer_1">Sample Answer Placeholder</string>
     <string name="fr_answer_placeholder">Type Answer</string>
 
     <string name="label_results">Results</string>
