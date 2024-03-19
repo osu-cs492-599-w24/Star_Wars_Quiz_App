@@ -7,6 +7,7 @@ import android.widget.TextView
 import android.widget.VideoView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.starwarsquiz.R
 
@@ -35,6 +36,18 @@ class QuizResultsFragment : Fragment(R.layout.fragment_quiz_results) {
             perform logic below
             eg. navigate to home on home btn click or first question on restart btn click
          */
+
+        // Restart button goes to first question
+        restartButton.setOnClickListener {
+            val action = QuizResultsFragmentDirections.navigateToQuizQuestionMc()
+            findNavController().navigate(action)
+        }
+
+        // Home button goes to landing page
+        homeButton.setOnClickListener {
+            val action = QuizResultsFragmentDirections.navigateToLandingPage()
+            findNavController().navigate(action)
+        }
 
         quizScoreViewModel.highestScore.observe(viewLifecycleOwner) { highScore ->
             highestScoreTV.text = getString(R.string.highest_score, highScore.toString())

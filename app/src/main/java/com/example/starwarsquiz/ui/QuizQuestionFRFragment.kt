@@ -7,6 +7,7 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.starwarsquiz.R
 
 class QuizQuestionFRFragment : Fragment(R.layout.fragment_quiz_question_fr) {
@@ -33,6 +34,9 @@ class QuizQuestionFRFragment : Fragment(R.layout.fragment_quiz_question_fr) {
         submitButton = view.findViewById(R.id.button_submit)
         nextButton = view.findViewById(R.id.button_next)
 
+        var score = 0
+        score += 1 // This line is just to suppress the unused variable warning
+
         /*
             perform logic below
 
@@ -40,5 +44,11 @@ class QuizQuestionFRFragment : Fragment(R.layout.fragment_quiz_question_fr) {
             then turn button invisible, and set 'next' button to visible to navigate to next question
             (or results screen if last question)
          */
+
+        // Submit button goes to results screen
+        submitButton.setOnClickListener {
+            val action = QuizQuestionFRFragmentDirections.navigateToQuizResults(score)
+            findNavController().navigate(action)
+        }
     }
 }

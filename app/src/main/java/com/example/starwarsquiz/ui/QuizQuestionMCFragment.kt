@@ -7,6 +7,7 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.starwarsquiz.R
 
@@ -37,6 +38,9 @@ class QuizQuestionMCFragment : Fragment(R.layout.fragment_quiz_question_mc){
         submitButton = view.findViewById(R.id.button_submit)
         nextButton = view.findViewById(R.id.button_next)
 
+        var score = 0
+        score += 1 // This line is just to suppress the unused variable warning
+
         /*
             perform logic below
 
@@ -48,5 +52,11 @@ class QuizQuestionMCFragment : Fragment(R.layout.fragment_quiz_question_mc){
             a clicked answer in the RV and compare it to the correct answer upon clicking submit
             (perform error handling when no answer is selected)
          */
+
+        // Submit button goes to results screen
+        submitButton.setOnClickListener {
+            val action = QuizQuestionMCFragmentDirections.navigateToQuizResults(score)
+            findNavController().navigate(action)
+        }
     }
 }
