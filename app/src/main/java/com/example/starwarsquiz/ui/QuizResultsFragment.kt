@@ -2,6 +2,7 @@ package com.example.starwarsquiz.ui
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import android.widget.TextView
 import android.widget.VideoView
 import androidx.fragment.app.Fragment
@@ -11,27 +12,37 @@ import com.example.starwarsquiz.R
 
 class QuizResultsFragment : Fragment(R.layout.fragment_quiz_results) {
     private val args: QuizResultsFragmentArgs by navArgs()
+    // declare necessary view models here
+    private val quizScoreViewModel: QuizScoreViewModel by viewModels()
 
-    private val scoreViewModel by viewModels<QuizScoreViewModel>()
-
+    private lateinit var finalScoreTV: TextView
+    private lateinit var highestScoreTV: TextView
+    private lateinit var homeButton: Button
+    private lateinit var restartButton: Button
     private lateinit var rewardVV: VideoView
-    private lateinit var scoreTV: TextView
-    private lateinit var highscoreTV: TextView
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        finalScoreTV = view.findViewById(R.id.tv_final_score)
+        highestScoreTV = view.findViewById(R.id.tv_highest_score)
+        homeButton = view.findViewById(R.id.button_home)
+        restartButton = view.findViewById(R.id.button_restart_quiz)
         rewardVV = view.findViewById(R.id.vv_reward_video)
-        scoreTV = view.findViewById(R.id.tv_final_score)
-        highscoreTV = view.findViewById(R.id.tv_highest_score)
 
-        scoreViewModel.highestScore.observe(viewLifecycleOwner) { highScore ->
-            highscoreTV.text = getString(R.string.highest_score, highScore.toString())
+        /*
+            perform logic below
+            eg. navigate to home on home btn click or first question on restart btn click
+         */
+         
+        quizScoreViewModel.highestScore.observe(viewLifecycleOwner) { highScore ->
+            highestScoreTV.text = getString(R.string.highest_score, highScore.toString())
         }
-
+        
         // Set the score text
         val score = args.quizResults
-        scoreTV.text = getString(R.string.your_score, score.toString())
-
+        finalScoreTV.text = getString(R.string.your_score, score.toString())
+        
         // Tap-to-pause video
         rewardVV.setOnClickListener {
             if (rewardVV.isPlaying) {
@@ -48,7 +59,6 @@ class QuizResultsFragment : Fragment(R.layout.fragment_quiz_results) {
 
         rewardVV.start()
     }
-
     private fun getRewardVideo(score: Int) : String {
         val videoResource = when (score) {
             in 0..1 -> R.raw.deathstar
@@ -58,5 +68,4 @@ class QuizResultsFragment : Fragment(R.layout.fragment_quiz_results) {
             else -> R.raw.highground
         }
         return "android.resource://" + requireActivity().packageName + "/" + videoResource
-    }
 }

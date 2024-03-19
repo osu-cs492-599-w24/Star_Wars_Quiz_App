@@ -35,7 +35,7 @@ class MCAnswerListAdapter() : RecyclerView.Adapter<MCAnswerListAdapter.MCAnswerV
 
         init {
             itemView.setOnClickListener {
-//                itemView.setBackgroundColor(Color.parseColor("#ADD8E6"))
+//              toggle appearance of btn on click eg. itemView.setBackgroundColor(Color.parseColor("#ADD8E6"))
             }
         }
 
