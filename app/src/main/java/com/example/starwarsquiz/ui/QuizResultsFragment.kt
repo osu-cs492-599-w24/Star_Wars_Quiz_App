@@ -1,8 +1,10 @@
 package com.example.starwarsquiz.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.VideoView
 import androidx.fragment.app.Fragment
@@ -21,6 +23,7 @@ class QuizResultsFragment : Fragment(R.layout.fragment_quiz_results) {
     private lateinit var highestScoreTV: TextView
     private lateinit var homeButton: Button
     private lateinit var restartButton: Button
+    private lateinit var shareButton: ImageButton
     private lateinit var rewardVV: VideoView
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -30,6 +33,7 @@ class QuizResultsFragment : Fragment(R.layout.fragment_quiz_results) {
         highestScoreTV = view.findViewById(R.id.tv_highest_score)
         homeButton = view.findViewById(R.id.button_home)
         restartButton = view.findViewById(R.id.button_restart_quiz)
+        shareButton = view.findViewById(R.id.button_share_score)
         rewardVV = view.findViewById(R.id.vv_reward_video)
 
         /*
@@ -47,6 +51,19 @@ class QuizResultsFragment : Fragment(R.layout.fragment_quiz_results) {
         homeButton.setOnClickListener {
             val action = QuizResultsFragmentDirections.navigateToLandingPage()
             findNavController().navigate(action)
+        }
+
+        shareButton.setOnClickListener {
+            val shareText = getString(
+                R.string.share_text,
+                args.quizResults.toString()
+            )
+            val intent: Intent = Intent().apply {
+                action = Intent.ACTION_SEND
+                putExtra(Intent.EXTRA_TEXT,shareText)
+                type = "text/plain"
+            }
+            startActivity(Intent.createChooser(intent, null))
         }
 
         quizScoreViewModel.highestScore.observe(viewLifecycleOwner) { highScore ->

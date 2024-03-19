@@ -20,6 +20,8 @@
     <string name="label_results">Results</string>
     <string name="your_score">%1$s points</string>
 
+    <string name="share_text">I Got %1$s/10 on Star Wars Quizzer!!!</string>
+
     <string name="highest_score">Highest score: %1$s points</string>
 
 </resources>
