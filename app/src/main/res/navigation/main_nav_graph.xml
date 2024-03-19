@@ -55,7 +55,8 @@
         android:name="com.example.starwarsquiz.ui.QuizResultsFragment">
         <argument
             android:name="quizResults"
-            app:argType="com.example.starwarsquiz.data.QuizResults"/>
+            app:argType="integer"
+            android:defaultValue="0"/>
         <action
             android:id="@+id/navigate_to_quiz_question_mc"
             app:destination="@id/quiz_question_mc" />

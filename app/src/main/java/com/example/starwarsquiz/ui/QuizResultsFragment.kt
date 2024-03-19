@@ -29,7 +29,7 @@ class QuizResultsFragment : Fragment(R.layout.fragment_quiz_results) {
         }
 
         // Set the score text
-        val score = args.quizResults?.score ?: 0
+        val score = args.quizResults
         scoreTV.text = getString(R.string.your_score, score.toString())
 
         // Tap-to-pause video
