@@ -12,6 +12,7 @@ import com.example.starwarsquiz.R
 
 class QuizResultsFragment : Fragment(R.layout.fragment_quiz_results) {
     private val args: QuizResultsFragmentArgs by navArgs()
+
     // declare necessary view models here
     private val quizScoreViewModel: QuizScoreViewModel by viewModels()
 
@@ -34,15 +35,15 @@ class QuizResultsFragment : Fragment(R.layout.fragment_quiz_results) {
             perform logic below
             eg. navigate to home on home btn click or first question on restart btn click
          */
-         
+
         quizScoreViewModel.highestScore.observe(viewLifecycleOwner) { highScore ->
             highestScoreTV.text = getString(R.string.highest_score, highScore.toString())
         }
-        
+
         // Set the score text
         val score = args.quizResults
         finalScoreTV.text = getString(R.string.your_score, score.toString())
-        
+
         // Tap-to-pause video
         rewardVV.setOnClickListener {
             if (rewardVV.isPlaying) {
@@ -59,7 +60,8 @@ class QuizResultsFragment : Fragment(R.layout.fragment_quiz_results) {
 
         rewardVV.start()
     }
-    private fun getRewardVideo(score: Int) : String {
+
+    private fun getRewardVideo(score: Int): String {
         val videoResource = when (score) {
             in 0..1 -> R.raw.deathstar
             in 2..3 -> R.raw.father
@@ -68,4 +70,5 @@ class QuizResultsFragment : Fragment(R.layout.fragment_quiz_results) {
             else -> R.raw.highground
         }
         return "android.resource://" + requireActivity().packageName + "/" + videoResource
+    }
 }
