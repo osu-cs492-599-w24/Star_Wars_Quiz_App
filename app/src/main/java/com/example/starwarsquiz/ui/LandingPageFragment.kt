@@ -21,9 +21,9 @@ class LandingPageFragment : Fragment(R.layout.fragment_landing_page){
             val newArgs = QuestionContents(
                 1,
                 0,
-                "REPLACE ME WITH AN ACTUAL QUESTION",
-                "ANSWER 1",
-                listOf("ANSWER 1", "ANSWER 2", "ANSWER 3", "ANSWER 4")
+                "What planet is Darth Maul from?",
+                SWAPIPlanetList[36-1].name,
+                listOf(SWAPIPlanetList[1-1].name, SWAPIPlanetList[36-1].name, SWAPIPlanetList[14-1].name, SWAPIPlanetList[8-1].name)
             )
             val action = LandingPageFragmentDirections.navigateToQuizQuestionMc(newArgs)
             findNavController().navigate(action)
