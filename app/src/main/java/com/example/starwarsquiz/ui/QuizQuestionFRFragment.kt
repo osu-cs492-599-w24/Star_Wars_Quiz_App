@@ -92,6 +92,8 @@ class QuizQuestionFRFragment : Fragment(R.layout.fragment_quiz_question_fr) {
                 args.questionContents.currentScore
             }
 
+
+            /*
             val newArgs = QuestionContents(
                 args.questionContents.quizNumber + 1,
                 nextScore,
@@ -99,6 +101,140 @@ class QuizQuestionFRFragment : Fragment(R.layout.fragment_quiz_question_fr) {
                 "ANSWER 1",
                 listOf("ANSWER 1", "ANSWER 2", "ANSWER 3", "ANSWER 4")
             )
+            */
+            
+            //58-1 or -2 bc of people/17?
+            args.questionContents.quizNumber + 1
+            
+            if(args.questionContents.quizNumber == 1){
+            
+            	val newArgs = QuestionContents(
+                            args.questionContents.quizNumber,
+                            nextScore,
+                            "What planet is Darth Maul from?",
+                            SWAPIPlanetList[36-1].name,
+                            listOf(SWAPIPlanetList[1-1].name, SWAPIPlanetList[36-1].name, SWAPIPlanetList[14-1].name, SWAPIPlanetList[8-1].name)
+                        )
+            
+            }
+            
+            else if(args.questionContents.quizNumber == 2){
+            
+                val newArgs = QuestionContents(
+                            args.questionContents.quizNumber,
+                            nextScore,
+                            "Who was Starkiller's master?",
+                            SWAPICharacterList[4-1].name,
+                            listOf(SWAPICharacterList[4-1].name, SWAPICharacterList[11-1].name, SWAPICharacterList[10-1].name, SWAPICharacterList[4-1].name)
+            
+                        )
+            
+            }
+            
+            else if(args.questionContents.quizNumber == 3){
+            
+                val newArgs = QuestionContents(
+                            args.questionContents.quizNumber,
+                            nextScore,
+                            "Who was the jedi that discovered Ahsoka?", 
+                            SWAPICharacterList[58-1].name,
+                            listOf(SWAPICharacterList[11-1].name, SWAPICharacterList[53-1].name, SWAPICharacterList[10-1].name, SWAPICharacterList[58-1].name)
+            
+                        )
+            
+            }
+            
+            else if(args.questionContents.quizNumber == 4){
+            
+                val newArgs = QuestionContents(
+                            args.questionContents.quizNumber,
+                            nextScore,
+                            "Whose DNA was used to create the clone troopers?",
+                            SWAPICharacterList[69-1].name,
+                            listOf(SWAPICharacterList[69-1].name, SWAPICharacterList[72-1].name, SWAPICharacterList[22-1].name, SWAPICharacterList[67-1].name)
+            
+                        )
+            
+            }
+            
+            else if(args.questionContents.quizNumber == 5){
+            
+                val newArgs = QuestionContents(
+                            args.questionContents.quizNumber,
+                            nextScore,
+                            "Who was the only unaltered clone?",
+                            SWAPICharacterList[22-1].name,
+                            listOf(SWAPICharacterList[69-1].name, SWAPICharacterList[72-1].name, SWAPICharacterList[22-1].name, SWAPICharacterList[67-1].name)
+            
+                        )
+            
+            }
+            
+            else if(args.questionContents.quizNumber == 6){
+            
+                val newArgs = QuestionContents(
+                            args.questionContents.quizNumber,
+                            nextScore,
+                            "Who was Qui Gon Jinn's master?"
+                            SWAPICharacterList[67-1].name,
+                            listOf(SWAPICharacterList[1-1].name, SWAPICharacterList[20-1].name, SWAPICharacterList[67-1].name, SWAPICharacterList[10-1].name)
+            
+                        )
+            
+            }
+            
+            else if(args.questionContents.quizNumber == 7){
+            
+                val newArgs = QuestionContents(
+                            args.questionContents.quizNumber,
+                            nextScore,
+                            "What planet was Palpatine from?"
+                            SWAPIPlanetList[8-1].name,
+                            listOf(SWAPIPlanetList[1-1].name, SWAPIPlanetList[9-1].name, SWAPIPlanetList[7-1].name, SWAPIPlanetList[8-1].name)
+            
+                        )
+            
+            }
+            
+            else if(args.questionContents.quizNumber == 8){
+            
+                val newArgs = QuestionContents(
+                            args.questionContents.quizNumber,
+                            nextScore,
+                            "What planet was Starkiller from?"
+                            SWAPIPlanetList[14-1].name,
+                            listOf(SWAPIPlanetList[9-1].name, SWAPIPlanetList[14-1].name, SWAPIPlanetList[10-1].name, SWAPIPlanetList[5-1].name)
+            
+                        )
+            
+            }
+            
+            else if(args.questionContents.quizNumber == 9){
+            
+                val newArgs = QuestionContents(
+                            args.questionContents.quizNumber,
+                            nextScore,
+                            "Who inquired about the droid attack on the wookies?"
+                            SWAPICharacterList[52-1].name,
+                            listOf(SWAPICharacterList[52-1].name, SWAPICharacterList[57-1].name, SWAPICharacterList[58-1].name, SWAPICharacterList[51-1].name)
+            
+                        )
+            
+            }
+            
+            else if(args.questionContents.quizNumber == 10){
+            
+                val newArgs = QuestionContents(
+                            args.questionContents.quizNumber,
+                            nextScore,
+                            "Hello there"
+                            SWAPICharacterList[10-1].name,
+                            listOf(SWAPICharacterList[79-1].name, SWAPICharacterList[11-1].name, SWAPICharacterList[1-1].name, SWAPICharacterList[10-1].name)
+            
+                        )
+            
+            }
+            
             val action = QuizQuestionFRFragmentDirections.navigateToQuizQuestionMc(newArgs)
             findNavController().navigate(action)
         }
