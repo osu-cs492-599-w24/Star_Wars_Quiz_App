@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.starwarsquiz.R
 import com.example.starwarsquiz.data.QuestionContents
+import com.example.starwarsquiz.data.QuizScoreEntity
 
 class QuizResultsFragment : Fragment(R.layout.fragment_quiz_results) {
     private val args: QuizResultsFragmentArgs by navArgs()
@@ -24,6 +25,7 @@ class QuizResultsFragment : Fragment(R.layout.fragment_quiz_results) {
     private lateinit var highestScoreTV: TextView
     private lateinit var homeButton: Button
     private lateinit var restartButton: Button
+    private lateinit var historyButton: Button
     private lateinit var shareButton: ImageButton
     private lateinit var rewardVV: VideoView
 
@@ -34,6 +36,7 @@ class QuizResultsFragment : Fragment(R.layout.fragment_quiz_results) {
         highestScoreTV = view.findViewById(R.id.tv_highest_score)
         homeButton = view.findViewById(R.id.button_home)
         restartButton = view.findViewById(R.id.button_restart_quiz)
+        historyButton = view.findViewById(R.id.button_score_history)
         shareButton = view.findViewById(R.id.button_share_score)
         rewardVV = view.findViewById(R.id.vv_reward_video)
 
@@ -58,6 +61,11 @@ class QuizResultsFragment : Fragment(R.layout.fragment_quiz_results) {
         // Home button goes to landing page
         homeButton.setOnClickListener {
             val action = QuizResultsFragmentDirections.navigateToLandingPage()
+            findNavController().navigate(action)
+        }
+
+        historyButton.setOnClickListener {
+            val action = QuizResultsFragmentDirections.navigateToScoreHistory()
             findNavController().navigate(action)
         }
 
@@ -90,6 +98,12 @@ class QuizResultsFragment : Fragment(R.layout.fragment_quiz_results) {
                 rewardVV.start()
             }
         }
+        val scoreEntity = QuizScoreEntity(
+            runId = 0,
+            score = args.quizResults,
+            timestamp = System.currentTimeMillis()
+        )
+        quizScoreViewModel.addQuizScore(scoreEntity)
 
         // If we're passed the quiz results, we can play the reward video
         val videoPath = getRewardVideo(score)

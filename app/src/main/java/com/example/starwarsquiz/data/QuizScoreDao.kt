@@ -18,7 +18,7 @@ interface QuizScoreDao {
     )
     suspend fun deleteAllExceptHighestScore()
 
-    @Query("SELECT * FROM QuizScoreEntity ORDER BY timestamp DESC")
+    @Query("SELECT * FROM QuizScoreEntity ORDER BY score DESC")
     fun getAllScores() : Flow<List<QuizScoreEntity>>
 
     @Query("UPDATE QuizScoreEntity SET score = :newScore WHERE runId = :runId")
