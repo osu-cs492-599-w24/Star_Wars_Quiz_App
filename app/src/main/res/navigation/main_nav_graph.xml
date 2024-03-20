@@ -17,7 +17,7 @@
             app:destination="@id/quiz_question_fr" />
         <action
             android:id="@+id/navigate_to_score_history"
-            app:destination="@id/navigate_to_score_history" />
+            app:destination="@id/score_history" />
 
     </fragment>
 
@@ -82,7 +82,6 @@
         <action
             android:id="@+id/navigate_to_landing_page"
             app:destination="@id/landing_page" />
-
         <action
             android:id="@+id/navigate_to_score_history"
             app:destination="@id/score_history"/>

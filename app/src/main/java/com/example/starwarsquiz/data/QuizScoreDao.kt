@@ -11,6 +11,9 @@ interface QuizScoreDao {
     @Insert
     suspend fun insert(score: QuizScoreEntity)
 
+    @Query("SELECT * FROM QuizScoreEntity")
+    fun getAllScores() : Flow<List<QuizScoreEntity>>
+
     @Query("UPDATE QuizScoreEntity SET score = :newScore WHERE runId = :runId")
     suspend fun updateCurrentScore(runId: Int, newScore: Int)
 

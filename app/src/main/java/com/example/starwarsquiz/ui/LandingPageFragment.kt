@@ -9,15 +9,22 @@ import com.example.starwarsquiz.R
 
 class LandingPageFragment : Fragment(R.layout.fragment_landing_page){
     private lateinit var startButton: Button
+    private lateinit var historyButton: Button
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         startButton = view.findViewById(R.id.start_button)
+        historyButton = view.findViewById(R.id.button_score_history)
 
         // navigate to first question on start btn click
         startButton.setOnClickListener {
             val action = LandingPageFragmentDirections.navigateToQuizQuestionMc()
+            findNavController().navigate(action)
+        }
+
+        historyButton.setOnClickListener {
+            val action = LandingPageFragmentDirections.navigateToScoreHistory()
             findNavController().navigate(action)
         }
     }

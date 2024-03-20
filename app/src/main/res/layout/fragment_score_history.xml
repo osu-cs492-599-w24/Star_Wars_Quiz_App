@@ -18,6 +18,7 @@
         android:layout_height="wrap_content"
         android:text="@string/home"
         android:textSize="20sp"
-        android:padding="15dp" />
+        android:padding="15dp"
+        android:layout_gravity="center|bottom"/>
 
 </FrameLayout>

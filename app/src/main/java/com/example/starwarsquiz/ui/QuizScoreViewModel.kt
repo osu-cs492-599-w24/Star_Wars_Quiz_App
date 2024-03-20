@@ -16,6 +16,8 @@ class QuizScoreViewModel(application: Application) : AndroidViewModel(applicatio
 
     val highestScore = repository.getHighestScore().asLiveData()
 
+    val allQuizScores = repository.getAllScores().asLiveData()
+
     fun addQuizScore(quizScore: QuizScoreEntity) {
         viewModelScope.launch {
             repository.insertQuizScore(quizScore)
