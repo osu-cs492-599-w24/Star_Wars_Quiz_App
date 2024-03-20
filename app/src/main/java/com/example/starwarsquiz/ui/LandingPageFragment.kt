@@ -10,29 +10,22 @@ import com.example.starwarsquiz.data.QuestionContents
 
 class LandingPageFragment : Fragment(R.layout.fragment_landing_page){
     private lateinit var startButton: Button
-    private lateinit var historyButton: Button
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         startButton = view.findViewById(R.id.start_button)
-        historyButton = view.findViewById(R.id.button_score_history)
 
         // navigate to first question on start btn click
         startButton.setOnClickListener {
             val newArgs = QuestionContents(
                 1,
                 0,
-                "REPLACE ME WITH AN ACTUAL QUESTION",
-                "ANSWER 1",
-                listOf("ANSWER 1", "ANSWER 2", "ANSWER 3", "ANSWER 4")
+                "What planet is Darth Maul from?",
+                "",
+                listOf("", "", "", "")
             )
             val action = LandingPageFragmentDirections.navigateToQuizQuestionMc(newArgs)
-            findNavController().navigate(action)
-        }
-
-        historyButton.setOnClickListener {
-            val action = LandingPageFragmentDirections.navigateToScoreHistory()
             findNavController().navigate(action)
         }
     }
