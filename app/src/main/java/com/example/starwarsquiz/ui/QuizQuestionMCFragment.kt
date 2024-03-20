@@ -37,7 +37,7 @@ class QuizQuestionMCFragment : Fragment(R.layout.fragment_quiz_question_mc){
         questionNumTV = view.findViewById(R.id.tv_quiz_question_num)
         currentScoreTV = view.findViewById(R.id.tv_quiz_current_score)
         questionTV = view.findViewById(R.id.tv_quiz_question)
-        answerListRV = view.findViewById(R.id.rv_quiz_question_answers)
+        answerListRV = view.findViewById(R.id .rv_quiz_question_answers)
         submitButton = view.findViewById(R.id.button_submit)
         nextButton = view.findViewById(R.id.button_next)
 

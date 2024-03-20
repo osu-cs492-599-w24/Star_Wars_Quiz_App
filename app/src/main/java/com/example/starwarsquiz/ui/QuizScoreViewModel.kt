@@ -16,6 +16,8 @@ class QuizScoreViewModel(application: Application) : AndroidViewModel(applicatio
 
     val highestScore = repository.getHighestScore().asLiveData()
 
+    val allQuizScores = repository.getAllScores().asLiveData()
+
     fun addQuizScore(quizScore: QuizScoreEntity) {
         viewModelScope.launch {
             repository.insertQuizScore(quizScore)
@@ -25,6 +27,12 @@ class QuizScoreViewModel(application: Application) : AndroidViewModel(applicatio
     fun updateQuizScore(runId: Int, newScore: Int) {
         viewModelScope.launch {
             repository.updateQuizScore(runId, newScore)
+        }
+    }
+
+    fun clearExceptHighestScores() {
+        viewModelScope.launch {
+            repository.deleteAllExceptHighScore()
         }
     }
 }

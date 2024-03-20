@@ -5,7 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [QuizScoreEntity::class], version = 1)
+@Database(entities = [QuizScoreEntity::class], version = 2)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun quizScoreDao() : QuizScoreDao
 
@@ -17,7 +17,7 @@ abstract class AppDatabase : RoomDatabase() {
                 context,
                 AppDatabase::class.java,
                 "quiz-score-db"
-            ).build()
+            ).fallbackToDestructiveMigration().build()
 
         fun getInstance(context: Context) : AppDatabase {
             return instance ?: synchronized(this) {

@@ -15,6 +15,10 @@
         <action
             android:id="@+id/navigate_to_quiz_question_fr"
             app:destination="@id/quiz_question_fr" />
+        <action
+            android:id="@+id/navigate_to_score_history"
+            app:destination="@id/score_history" />
+
     </fragment>
 
     <fragment
@@ -52,6 +56,15 @@
     </fragment>
 
     <fragment
+        android:id="@+id/score_history"
+        android:name="com.example.starwarsquiz.ui.ScoreHistoryFragment">
+        <action
+            android:id="@+id/navigate_to_landing_page"
+            app:destination="@id/landing_page"/>
+
+    </fragment>
+
+    <fragment
         android:id="@+id/quiz_results"
         android:name="com.example.starwarsquiz.ui.QuizResultsFragment">
         <argument
@@ -67,6 +80,9 @@
         <action
             android:id="@+id/navigate_to_landing_page"
             app:destination="@id/landing_page" />
+        <action
+            android:id="@+id/navigate_to_score_history"
+            app:destination="@id/score_history"/>
     </fragment>
 
 </navigation>

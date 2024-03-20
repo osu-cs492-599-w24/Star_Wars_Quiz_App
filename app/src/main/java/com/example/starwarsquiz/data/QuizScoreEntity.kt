@@ -8,5 +8,6 @@ import java.io.Serializable
 data class QuizScoreEntity(
     @PrimaryKey(autoGenerate = true)
     val runId: Int,
-    val score: Int
+    val score: Int,
+    val timestamp: Long
 ) : Serializable

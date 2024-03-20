@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
          * under the tag "ViewModel".
          */
         resultViewModel.loadSWAPICharacters(1, 10)
-        characterDetailsViewModel.loadSWAPICharactersDetails(1)
+        characterDetailsViewModel.loadSWAPICharactersDetails(17)
         planetsViewModel.loadSWAPIPlanets(1, 10)
         planetDetailsViewModel.loadSWAPIPlanetDetails(1)
     }
