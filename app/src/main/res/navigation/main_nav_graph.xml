@@ -61,7 +61,7 @@
         android:id="@+id/score_history"
         android:name="com.example.starwarsquiz.ui.ScoreHistoryFragment">
         <action
-            android:id="@+id/landing_page"
+            android:id="@+id/navigate_to_landing_page"
             app:destination="@id/landing_page"/>
 
     </fragment>
