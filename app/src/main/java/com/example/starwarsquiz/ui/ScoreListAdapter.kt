@@ -7,6 +7,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.starwarsquiz.R
 import com.example.starwarsquiz.data.QuizScoreEntity
+import java.text.SimpleDateFormat
+import java.time.Instant
+import java.util.Date
+import java.util.Locale
+import java.util.TimeZone
 
 class ScoreListAdapter(
     private val onScoreClick: (QuizScoreEntity) -> Unit
@@ -44,9 +49,23 @@ class ScoreListAdapter(
             }
         }
 
-        fun bind(score: QuizScoreEntity) {
-            currentScore = score
-            scoreTV.text = score.score.toString()
+        fun bind(quizScore: QuizScoreEntity) {
+            currentScore = quizScore
+            val score = quizScore.score.toString()
+            val unixTime = quizScore.timestamp
+            val date = Date(unixTime)
+            val dayOfMonth = SimpleDateFormat("d", Locale.getDefault()).format(date).toInt()
+            val daySuffix = when {
+                dayOfMonth in 11..13 -> "th"
+                dayOfMonth % 10 == 1 -> "st"
+                dayOfMonth % 10 == 2 -> "nd"
+                dayOfMonth % 10 == 3 -> "rd"
+                else -> "th"
+            }
+            val sdf = SimpleDateFormat("MMM d'$daySuffix'", Locale.getDefault())
+            val formattedDate = sdf.format(date)
+
+            scoreTV.text = "Your Score was ${score}/10 on ${formattedDate}"
         }
     }
 }

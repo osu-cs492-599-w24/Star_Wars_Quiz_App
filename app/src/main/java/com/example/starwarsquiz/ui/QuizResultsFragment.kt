@@ -93,7 +93,8 @@ class QuizResultsFragment : Fragment(R.layout.fragment_quiz_results) {
 
         val scoreEntity = QuizScoreEntity(
             runId = 0,
-            score = args.quizResults
+            score = args.quizResults,
+            timestamp = System.currentTimeMillis()
         )
         quizScoreViewModel.addQuizScore(scoreEntity)
 
