@@ -12,7 +12,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.starwarsquiz.R
-import com.example.starwarsquiz.data.QuizScoreEntity
+import com.example.starwarsquiz.data.QuestionContents
 
 class QuizResultsFragment : Fragment(R.layout.fragment_quiz_results) {
     private val args: QuizResultsFragmentArgs by navArgs()
@@ -25,7 +25,6 @@ class QuizResultsFragment : Fragment(R.layout.fragment_quiz_results) {
     private lateinit var homeButton: Button
     private lateinit var restartButton: Button
     private lateinit var shareButton: ImageButton
-    private lateinit var historyButton: Button
     private lateinit var rewardVV: VideoView
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -36,7 +35,6 @@ class QuizResultsFragment : Fragment(R.layout.fragment_quiz_results) {
         homeButton = view.findViewById(R.id.button_home)
         restartButton = view.findViewById(R.id.button_restart_quiz)
         shareButton = view.findViewById(R.id.button_share_score)
-        historyButton = view.findViewById(R.id.button_score_history)
         rewardVV = view.findViewById(R.id.vv_reward_video)
 
         /*
@@ -46,18 +44,20 @@ class QuizResultsFragment : Fragment(R.layout.fragment_quiz_results) {
 
         // Restart button goes to first question
         restartButton.setOnClickListener {
-            val action = QuizResultsFragmentDirections.navigateToQuizQuestionMc()
+            val newArgs = QuestionContents(
+                1,
+                0,
+                "REPLACE ME WITH AN ACTUAL QUESTION",
+                "ANSWER 1",
+                listOf("ANSWER 1", "ANSWER 2", "ANSWER 3", "ANSWER 4")
+            )
+            val action = QuizResultsFragmentDirections.navigateToQuizQuestionMc(newArgs)
             findNavController().navigate(action)
         }
 
         // Home button goes to landing page
         homeButton.setOnClickListener {
             val action = QuizResultsFragmentDirections.navigateToLandingPage()
-            findNavController().navigate(action)
-        }
-
-        historyButton.setOnClickListener {
-            val action = QuizResultsFragmentDirections.navigateToScoreHistory()
             findNavController().navigate(action)
         }
 
@@ -90,13 +90,6 @@ class QuizResultsFragment : Fragment(R.layout.fragment_quiz_results) {
                 rewardVV.start()
             }
         }
-
-        val scoreEntity = QuizScoreEntity(
-            runId = 0,
-            score = args.quizResults,
-            timestamp = System.currentTimeMillis()
-        )
-        quizScoreViewModel.addQuizScore(scoreEntity)
 
         // If we're passed the quiz results, we can play the reward video
         val videoPath = getRewardVideo(score)

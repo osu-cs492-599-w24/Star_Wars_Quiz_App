@@ -24,10 +24,9 @@
     <fragment
         android:id="@+id/quiz_question_mc"
         android:name="com.example.starwarsquiz.ui.QuizQuestionMCFragment">
-<!--        Uncomment when ready to pass question contents-->
-<!--        <argument-->
-<!--            android:name="questionContents"-->
-<!--            app:argType="com.example.starwarsquiz.data.QuestionContents"/>-->
+        <argument
+            android:name="questionContents"
+            app:argType="com.example.starwarsquiz.data.QuestionContents"/>
         <action
             android:id="@+id/navigate_to_quiz_question_mc"
             app:destination="@id/quiz_question_mc" />
@@ -42,10 +41,9 @@
     <fragment
         android:id="@+id/quiz_question_fr"
         android:name="com.example.starwarsquiz.ui.QuizQuestionFRFragment">
-<!--        Uncomment when ready to pass question contents-->
-<!--        <argument-->
-<!--            android:name="questionContents"-->
-<!--            app:argType="com.example.starwarsquiz.data.QuestionContents"/>-->
+        <argument
+            android:name="questionContents"
+            app:argType="com.example.starwarsquiz.data.QuestionContents"/>
         <action
             android:id="@+id/navigate_to_quiz_question_mc"
             app:destination="@id/quiz_question_mc" />
