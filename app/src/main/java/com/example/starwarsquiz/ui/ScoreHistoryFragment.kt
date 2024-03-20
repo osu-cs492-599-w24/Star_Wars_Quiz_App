@@ -18,11 +18,13 @@ class ScoreHistoryFragment : Fragment(R.layout.fragment_score_history) {
 
     private lateinit var scoresRV: RecyclerView
     private lateinit var homeButton: Button
+    private lateinit var clearHistoryButton: Button
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         homeButton = view.findViewById(R.id.button_home)
+        clearHistoryButton = view.findViewById(R.id.button_clear_history)
 
         scoresRV = view.findViewById(R.id.rv_scores)
         scoresRV.layoutManager = LinearLayoutManager(requireContext())
@@ -37,6 +39,10 @@ class ScoreHistoryFragment : Fragment(R.layout.fragment_score_history) {
         homeButton.setOnClickListener {
             val action = ScoreHistoryFragmentDirections.navigateToLandingPage()
             findNavController().navigate(action)
+        }
+
+        clearHistoryButton.setOnClickListener {
+            viewModel.clearExceptHighestScores()
         }
     }
 

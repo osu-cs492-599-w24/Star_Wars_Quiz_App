@@ -8,4 +8,6 @@ class QuizScoreRepository(
     fun getHighestScore() = dao.getHighestScore()
 
     fun getAllScores() = dao.getAllScores()
+
+    suspend fun deleteAllExceptHighScore() = dao.deleteAllExceptHighestScore()
 }

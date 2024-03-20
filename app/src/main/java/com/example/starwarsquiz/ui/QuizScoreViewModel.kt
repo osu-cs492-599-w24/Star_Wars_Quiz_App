@@ -29,4 +29,10 @@ class QuizScoreViewModel(application: Application) : AndroidViewModel(applicatio
             repository.updateQuizScore(runId, newScore)
         }
     }
+
+    fun clearExceptHighestScores() {
+        viewModelScope.launch {
+            repository.deleteAllExceptHighScore()
+        }
+    }
 }
