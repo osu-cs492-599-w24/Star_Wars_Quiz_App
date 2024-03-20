@@ -12,6 +12,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.starwarsquiz.R
+import com.example.starwarsquiz.data.QuestionContents
 
 class QuizResultsFragment : Fragment(R.layout.fragment_quiz_results) {
     private val args: QuizResultsFragmentArgs by navArgs()
@@ -43,7 +44,14 @@ class QuizResultsFragment : Fragment(R.layout.fragment_quiz_results) {
 
         // Restart button goes to first question
         restartButton.setOnClickListener {
-            val action = QuizResultsFragmentDirections.navigateToQuizQuestionMc()
+            val newArgs = QuestionContents(
+                1,
+                0,
+                "REPLACE ME WITH AN ACTUAL QUESTION",
+                "ANSWER 1",
+                listOf("ANSWER 1", "ANSWER 2", "ANSWER 3", "ANSWER 4")
+            )
+            val action = QuizResultsFragmentDirections.navigateToQuizQuestionMc(newArgs)
             findNavController().navigate(action)
         }
 

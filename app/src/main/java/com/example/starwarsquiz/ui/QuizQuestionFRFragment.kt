@@ -1,6 +1,7 @@
 package com.example.starwarsquiz.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -8,11 +9,12 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.starwarsquiz.R
+import com.example.starwarsquiz.data.QuestionContents
 
 class QuizQuestionFRFragment : Fragment(R.layout.fragment_quiz_question_fr) {
-//    Uncomment when ready to pass question contents (also see nav graph)
-//    private val args: QuizQuestionFRFragmentArgs by navArgs()
+    private val args: QuizQuestionFRFragmentArgs by navArgs()
 
     // declare necessary view models here
     private val quizScoreViewModel: QuizScoreViewModel by viewModels()
@@ -34,9 +36,6 @@ class QuizQuestionFRFragment : Fragment(R.layout.fragment_quiz_question_fr) {
         submitButton = view.findViewById(R.id.button_submit)
         nextButton = view.findViewById(R.id.button_next)
 
-        var score = 0
-        score += 1 // This line is just to suppress the unused variable warning
-
         /*
             perform logic below
 
@@ -45,9 +44,62 @@ class QuizQuestionFRFragment : Fragment(R.layout.fragment_quiz_question_fr) {
             (or results screen if last question)
          */
 
+        // If this is not the final question, show the next button
+        if (args.questionContents.quizNumber < 10) {
+            nextButton.visibility = View.VISIBLE
+            submitButton.visibility = View.INVISIBLE
+        }
+
+        // Set question number
+        questionNumTV.text = args.questionContents.quizNumber.toString()
+
+        // Set question
+        questionTV.text = args.questionContents.question
+
+        // Set current score
+        currentScoreTV.text = args.questionContents.currentScore.toString()
+
         // Submit button goes to results screen
         submitButton.setOnClickListener {
+            val score = if (answerET.text.toString()
+                    .equals(args.questionContents.correctAnswer, ignoreCase = true)
+            ) {
+                // If answer is correct, increment score
+                args.questionContents.currentScore + 1
+            } else {
+                // If answer is incorrect, do not increment score
+                args.questionContents.currentScore
+            }
             val action = QuizQuestionFRFragmentDirections.navigateToQuizResults(score)
+            findNavController().navigate(action)
+        }
+
+        // Next button goes to next question
+        nextButton.setOnClickListener {
+            // Create new args to pass to next fragment
+            // Args is the QuestionContents object with the updated score
+
+            Log.d("QuizQuestionFRFragment", "Next button clicked")
+
+            // New score
+            val nextScore = if (answerET.text.toString()
+                    .equals(args.questionContents.correctAnswer, ignoreCase = true)
+            ) {
+                // If answer is correct, increment score
+                args.questionContents.currentScore + 1
+            } else {
+                // If answer is incorrect, do not increment score
+                args.questionContents.currentScore
+            }
+
+            val newArgs = QuestionContents(
+                args.questionContents.quizNumber + 1,
+                nextScore,
+                "REPLACE ME WITH AN ACTUAL QUESTION",
+                "ANSWER 1",
+                listOf("ANSWER 1", "ANSWER 2", "ANSWER 3", "ANSWER 4")
+            )
+            val action = QuizQuestionFRFragmentDirections.navigateToQuizQuestionMc(newArgs)
             findNavController().navigate(action)
         }
     }
