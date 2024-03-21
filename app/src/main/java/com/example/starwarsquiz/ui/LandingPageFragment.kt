@@ -56,5 +56,6 @@ class LandingPageFragment : Fragment(R.layout.fragment_landing_page){
             val action = LandingPageFragmentDirections.navigateToScoreHistory()
             findNavController().navigate(action)
         }
+
     }
 }
