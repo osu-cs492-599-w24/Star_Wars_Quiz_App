@@ -8,7 +8,7 @@ import com.squareup.moshi.ToJson
 
 data class CharacterDetails(
     val height: Int,
-    val mass: Int,
+    val mass: String,
     val hairColor: String,
     val skinColor: String,
     val eyeColor: String,
@@ -44,7 +44,7 @@ class SWAPICharacterInfoAdapter {
     @FromJson
     fun characterDetailsFromJson(characterDetails: SWAPICharacterResultJson) = CharacterDetails(
         height = characterDetails.result.properties.height.toInt(),
-        mass = characterDetails.result.properties.mass.toInt(),
+        mass = characterDetails.result.properties.mass,
         hairColor = characterDetails.result.properties.hair_color,
         skinColor = characterDetails.result.properties.skin_color,
         eyeColor = characterDetails.result.properties.eye_color,
