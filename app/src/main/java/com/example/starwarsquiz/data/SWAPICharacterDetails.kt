@@ -1,5 +1,6 @@
 package com.example.starwarsquiz.data
 
+import android.util.Log
 import com.squareup.moshi.FromJson
 import com.squareup.moshi.JsonClass
 import com.squareup.moshi.ToJson
@@ -7,14 +8,14 @@ import com.squareup.moshi.ToJson
 
 data class CharacterDetails(
     val height: Int,
-    val mass: Int,
+    val mass: String,
     val hairColor: String,
     val skinColor: String,
     val eyeColor: String,
     val birthYear: String,
     val gender: String,
     val name: String,
-    val homeworldUrl: String,
+    val homeworldId: Int,
 )
 @JsonClass(generateAdapter = true)
 data class SWAPICharacterResultJson(
@@ -43,15 +44,24 @@ class SWAPICharacterInfoAdapter {
     @FromJson
     fun characterDetailsFromJson(characterDetails: SWAPICharacterResultJson) = CharacterDetails(
         height = characterDetails.result.properties.height.toInt(),
-        mass = characterDetails.result.properties.mass.toInt(),
+        mass = characterDetails.result.properties.mass,
         hairColor = characterDetails.result.properties.hair_color,
         skinColor = characterDetails.result.properties.skin_color,
         eyeColor = characterDetails.result.properties.eye_color,
         birthYear = characterDetails.result.properties.birth_year,
         gender = characterDetails.result.properties.gender,
         name = characterDetails.result.properties.name,
-        homeworldUrl = characterDetails.result.properties.homeworld
+        homeworldId = parseHomeworldURL(characterDetails.result.properties.homeworld)
     )
+
+    private fun parseHomeworldURL(url: String): Int {
+        val lastIndex = url.lastIndexOf("/")
+
+        val id = url.substring(lastIndex + 1).toInt()
+        Log.d("SWAPI", "homworldID ${id}")
+
+        return id
+    }
 
     @ToJson
     fun characterDetailsToJson(characterDetails: CharacterDetails): String {

@@ -10,16 +10,23 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.starwarsquiz.R
+import com.example.starwarsquiz.data.CharacterDetails
+import com.example.starwarsquiz.data.PlanetDetails
 import com.example.starwarsquiz.data.QuestionContents
 import com.example.starwarsquiz.data.SWAPICharacter
 import com.example.starwarsquiz.data.SWAPIPlanet
 import com.google.android.material.card.MaterialCardView
+import com.example.starwarsquiz.data.SWAPICharacter
+import kotlin.random.Random
 
 class QuizQuestionMCFragment : Fragment(R.layout.fragment_quiz_question_mc){
     private val args: QuizQuestionMCFragmentArgs by navArgs()
 
     // declare necessary view models here
     private val quizScoreViewModel: QuizScoreViewModel by viewModels()
+    private val characterListViewModel: SWAPICharacterViewModel by viewModels()
+    private val characterDetailsViewModel: SWAPICharacterDetailsViewModel by viewModels()
+    private val planetDetailsViewModel: SWAPIPlanetDetailsViewModel by viewModels()
 
     private val planetsViewModel: SWAPIPlanetViewModel by viewModels()
     private val resultViewModel: SWAPICharacterViewModel by viewModels()
@@ -39,8 +46,15 @@ class QuizQuestionMCFragment : Fragment(R.layout.fragment_quiz_question_mc){
     private lateinit var mcChoice4: MaterialCardView
     private lateinit var tvChoice4: TextView
 
+    private var characterList: List<SWAPICharacter>? = null
+    private var characterDetails: CharacterDetails? = null
+    private var planetDetails: PlanetDetails? = null
+    private var listSize = 1..50
+    private val randomNumber = generateRandomNumber(listSize, 17)
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+//        characterListViewModel.loadSWAPICharacters(1, listSize.last)
 
         planetsViewModel.loadSWAPIPlanets(1, 40)
         var planet = listOf<SWAPIPlanet>()
@@ -98,6 +112,46 @@ class QuizQuestionMCFragment : Fragment(R.layout.fragment_quiz_question_mc){
         tvChoice2.text = args.questionContents.answerChoices?.get(1) ?: "NO VALUE"
         tvChoice3.text = args.questionContents.answerChoices?.get(2) ?: "NO VALUE"
         tvChoice4.text = args.questionContents.answerChoices?.get(3) ?: "NO VALUE"
+
+//        characterListViewModel.characterResults.observe(viewLifecycleOwner) { CharacterList ->
+//            if (CharacterList != null) {
+//                characterList = CharacterList
+//            } else {
+//                Log.d("MCFragment", "character list is null")
+//            }
+//        }
+
+        // Wait for both character and planet details to be loaded before starting the quiz
+        val oldNextVisibility = nextButton.visibility
+        val oldSubmitVisibility = submitButton.visibility
+        nextButton.visibility = View.INVISIBLE
+        submitButton.visibility = View.INVISIBLE
+        characterDetailsViewModel.loading.observe(viewLifecycleOwner) { loading ->
+            if (!loading) {
+                planetDetailsViewModel.loading.observe(viewLifecycleOwner) { loading ->
+                    if (!loading) {
+                        nextButton.visibility = oldNextVisibility
+                        submitButton.visibility = oldSubmitVisibility
+                    }
+                }
+            }
+        }
+
+        characterDetailsViewModel.characterDetails.observe(viewLifecycleOwner) { character ->
+            if (character != null) {
+                characterDetails = character
+            } else {
+                Log.d("MCFragment", "character details is null")
+            }
+        }
+
+        planetDetailsViewModel.planetDetails.observe(viewLifecycleOwner) { planet ->
+            if (planet != null) {
+                planetDetails = planet
+            } else {
+                Log.d("MCFragment", "planet details is null")
+            }
+        }
 
         // Set answer choice click listeners
         // Color it yellow, uncolor the others
@@ -371,5 +425,22 @@ class QuizQuestionMCFragment : Fragment(R.layout.fragment_quiz_question_mc){
         }
 
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        characterDetailsViewModel.loadSWAPICharactersDetails(randomNumber)
+
+//        characterDetails?.homeworldId?.let { planetDetailsViewModel.loadSWAPIPlanetDetails(it) }
+        planetDetailsViewModel.loadSWAPIPlanetDetails(1)
+    }
+
+    private fun generateRandomNumber(range: IntRange, excludedNumber: Int): Int {
+        var randomNumber: Int
+        do {
+            randomNumber = Random.nextInt(range.first, range.last + 1)
+        } while (randomNumber == excludedNumber)
+        return randomNumber
     }
 }

@@ -23,7 +23,7 @@ class SWAPIPlanetViewModel : ViewModel() {
 
     val error: LiveData<Throwable?> = _error
 
-    private val _loading = MutableLiveData<Boolean>(false)
+    private val _loading = MutableLiveData<Boolean>(true)
 
     val loading: LiveData<Boolean> = _loading
 
