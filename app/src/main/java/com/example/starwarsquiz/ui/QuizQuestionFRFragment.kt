@@ -41,7 +41,7 @@ class QuizQuestionFRFragment : Fragment(R.layout.fragment_quiz_question_fr) {
     private var characterDetails: CharacterDetails? = null
     private var planetDetails: PlanetDetails? = null
     private var listSize = 1..50
-    private val randomNumber = generateRandomNumber(listSize, 17)
+    private val randomNumber = generateRandomNumber(listSize)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -88,10 +88,10 @@ class QuizQuestionFRFragment : Fragment(R.layout.fragment_quiz_question_fr) {
         val oldSubmitVisibility = submitButton.visibility
         nextButton.visibility = View.INVISIBLE
         submitButton.visibility = View.INVISIBLE
-        characterDetailsViewModel.loading.observe(viewLifecycleOwner) { loading ->
-            if (!loading) {
-                planetDetailsViewModel.loading.observe(viewLifecycleOwner) { loading ->
-                    if (!loading) {
+        characterDetailsViewModel.loading.observe(viewLifecycleOwner) { loadCharacter ->
+            if (!loadCharacter) {
+                planetDetailsViewModel.loading.observe(viewLifecycleOwner) { loadPlanet ->
+                    if (!loadPlanet) {
                         nextButton.visibility = oldNextVisibility
                         submitButton.visibility = oldSubmitVisibility
                     }
@@ -355,11 +355,11 @@ class QuizQuestionFRFragment : Fragment(R.layout.fragment_quiz_question_fr) {
         planetDetailsViewModel.loadSWAPIPlanetDetails(1)
     }
 
-    private fun generateRandomNumber(range: IntRange, excludedNumber: Int): Int {
+    private fun generateRandomNumber(range: IntRange): Int {
         var randomNumber: Int
         do {
             randomNumber = Random.nextInt(range.first, range.last + 1)
-        } while (randomNumber == excludedNumber)
+        } while (randomNumber == 17)
         return randomNumber
     }
 }

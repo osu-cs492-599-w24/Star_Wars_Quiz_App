@@ -1,6 +1,5 @@
 package com.example.starwarsquiz.ui
 
-import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -16,7 +15,6 @@ import com.example.starwarsquiz.data.CharacterDetails
 import com.example.starwarsquiz.data.PlanetDetails
 import com.example.starwarsquiz.data.QuestionContents
 
-import com.example.starwarsquiz.data.SWAPICharacter
 import kotlin.random.Random
 import com.example.starwarsquiz.data.SWAPIPlanet
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -34,7 +32,7 @@ class LandingPageFragment : Fragment(R.layout.fragment_landing_page){
     private var characterDetails: CharacterDetails? = null
     private var planetDetails: PlanetDetails? = null
     private var listSize = 1..50
-    private val randomNumber = generateRandomNumber(listSize, 17)
+    private val randomNumber = generateRandomNumber(listSize)
     private lateinit var loadingIndicator: CircularProgressIndicator
     private lateinit var loadingErrorTV: TextView
 
@@ -59,10 +57,10 @@ class LandingPageFragment : Fragment(R.layout.fragment_landing_page){
         loadingErrorTV = view.findViewById(R.id.tv_loading_error)
 
         // Wait for both character and planet details to be loaded before starting the quiz
-        characterDetailsViewModel.loading.observe(viewLifecycleOwner) { loading ->
-            if (loading) {
-                planetDetailsViewModel.loading.observe(viewLifecycleOwner) { loading ->
-                    if (loading) {
+        characterDetailsViewModel.loading.observe(viewLifecycleOwner) { loadCharacter ->
+            if (loadCharacter) {
+                planetDetailsViewModel.loading.observe(viewLifecycleOwner) { loadPlanet ->
+                    if (loadPlanet) {
                         loadingIndicator.visibility = View.VISIBLE
                         landingPageView.visibility = View.INVISIBLE
                     } else {
@@ -73,15 +71,15 @@ class LandingPageFragment : Fragment(R.layout.fragment_landing_page){
             }
         }
 
-        characterDetailsViewModel.error.observe(viewLifecycleOwner) { error ->
-            if (error != null) {
-                planetDetailsViewModel.error.observe(viewLifecycleOwner) { error ->
-                    if (error != null) {
-                        loadingErrorTV.text = getString(R.string.loading_error, error.message)
+        characterDetailsViewModel.error.observe(viewLifecycleOwner) { characterError ->
+            if (characterError != null) {
+                planetDetailsViewModel.error.observe(viewLifecycleOwner) { planetError ->
+                    if (planetError != null) {
+                        loadingErrorTV.text = getString(R.string.loading_error, planetError.message)
                         loadingErrorTV.visibility = View.VISIBLE
                         landingPageView.visibility = View.INVISIBLE
                         Log.e("LandingPageFragment",
-                            "Error fetching from API: ${error.message}")
+                            "Error fetching from API: ${planetError.message}")
                     }
                 }
             }
@@ -141,11 +139,11 @@ class LandingPageFragment : Fragment(R.layout.fragment_landing_page){
         planetDetailsViewModel.loadSWAPIPlanetDetails(1)
     }
 
-    private fun generateRandomNumber(range: IntRange, excludedNumber: Int): Int {
+    private fun generateRandomNumber(range: IntRange): Int {
         var randomNumber: Int
         do {
             randomNumber = Random.nextInt(range.first, range.last + 1)
-        } while (randomNumber == excludedNumber)
+        } while (randomNumber == 17)
         return randomNumber
     }
 }

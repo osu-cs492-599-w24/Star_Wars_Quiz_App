@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -23,8 +24,6 @@ class QuizQuestionMCFragment : Fragment(R.layout.fragment_quiz_question_mc){
     private val args: QuizQuestionMCFragmentArgs by navArgs()
 
     // declare necessary view models here
-    private val quizScoreViewModel: QuizScoreViewModel by viewModels()
-    private val characterListViewModel: SWAPICharacterViewModel by viewModels()
     private val characterDetailsViewModel: SWAPICharacterDetailsViewModel by viewModels()
     private val planetDetailsViewModel: SWAPIPlanetDetailsViewModel by viewModels()
 
@@ -47,14 +46,13 @@ class QuizQuestionMCFragment : Fragment(R.layout.fragment_quiz_question_mc){
     private lateinit var tvChoice4: TextView
 
     private lateinit var loadingIndicator: CircularProgressIndicator
-    private lateinit var MCPageView: View
+    private lateinit var mcPageView: View
     private lateinit var loadingErrorTV: TextView
 
-    private var characterList: List<SWAPICharacter>? = null
     private var characterDetails: CharacterDetails? = null
     private var planetDetails: PlanetDetails? = null
     private var listSize = 1..50
-    private val randomNumber = generateRandomNumber(listSize, 17)
+    private val randomNumber = generateRandomNumber(listSize)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -67,6 +65,11 @@ class QuizQuestionMCFragment : Fragment(R.layout.fragment_quiz_question_mc){
 
         var chosenAnswer = ""
         var showCorrect = false
+
+        val greenColor = ContextCompat.getColor(requireContext(), R.color.sw_green)
+        val yellowColor = ContextCompat.getColor(requireContext(), R.color.sw_yellow)
+        val greyColor = ContextCompat.getColor(requireContext(), R.color.grey)
+        val redColor = ContextCompat.getColor(requireContext(), R.color.sw_red)
 
         questionNumTV = view.findViewById(R.id.tv_quiz_question_num)
         currentScoreTV = view.findViewById(R.id.tv_quiz_current_score)
@@ -83,7 +86,7 @@ class QuizQuestionMCFragment : Fragment(R.layout.fragment_quiz_question_mc){
         tvChoice4 = view.findViewById(R.id.tv_mc_answer4)
 
         loadingIndicator = view.findViewById(R.id.loading_indicator)
-        MCPageView = view.findViewById(R.id.question_mc_layout)
+        mcPageView = view.findViewById(R.id.question_mc_layout)
 
         /*
             perform logic below
@@ -121,29 +124,29 @@ class QuizQuestionMCFragment : Fragment(R.layout.fragment_quiz_question_mc){
 
 
         // Wait for both character and planet details to be loaded before starting the quiz
-        characterDetailsViewModel.loading.observe(viewLifecycleOwner) { loading ->
-            if (loading) {
-                planetDetailsViewModel.loading.observe(viewLifecycleOwner) { loading ->
-                    if (loading) {
+        characterDetailsViewModel.loading.observe(viewLifecycleOwner) { loadCharacter ->
+            if (loadCharacter) {
+                planetDetailsViewModel.loading.observe(viewLifecycleOwner) { loadPlanet ->
+                    if (loadPlanet) {
                         loadingIndicator.visibility = View.VISIBLE
-                        MCPageView.visibility = View.INVISIBLE
+                        mcPageView.visibility = View.INVISIBLE
                     } else {
                         loadingIndicator.visibility = View.INVISIBLE
-                        MCPageView.visibility = View.VISIBLE
+                        mcPageView.visibility = View.VISIBLE
                     }
                 }
             }
         }
 
-        characterDetailsViewModel.error.observe(viewLifecycleOwner) { error ->
-            if (error != null) {
-                planetDetailsViewModel.error.observe(viewLifecycleOwner) { error ->
-                    if (error != null) {
-                        loadingErrorTV.text = getString(R.string.loading_error, error.message)
+        characterDetailsViewModel.error.observe(viewLifecycleOwner) { characterError ->
+            if (characterError != null) {
+                planetDetailsViewModel.error.observe(viewLifecycleOwner) { planetError ->
+                    if (planetError != null) {
+                        loadingErrorTV.text = getString(R.string.loading_error, planetError.message)
                         loadingErrorTV.visibility = View.VISIBLE
-                        MCPageView.visibility = View.INVISIBLE
+                        mcPageView.visibility = View.INVISIBLE
                         Log.e("LandingPageFragment",
-                            "Error fetching from API: ${error.message}")
+                            "Error fetching from API: ${planetError.message}")
                     }
                 }
             }
@@ -157,9 +160,9 @@ class QuizQuestionMCFragment : Fragment(R.layout.fragment_quiz_question_mc){
             }
         }
 
-        planetDetailsViewModel.planetDetails.observe(viewLifecycleOwner) { planet ->
-            if (planet != null) {
-                planetDetails = planet
+        planetDetailsViewModel.planetDetails.observe(viewLifecycleOwner) { planetDetail ->
+            if (planetDetail != null) {
+                planetDetails = planetDetail
             } else {
                 Log.d("MCFragment", "planet details is null")
             }
@@ -167,40 +170,39 @@ class QuizQuestionMCFragment : Fragment(R.layout.fragment_quiz_question_mc){
 
         // Set answer choice click listeners
         // Color it yellow, uncolor the others
-        // Yes, getColor is deprecated. I don't care.
         mcChoice1.setOnClickListener {
             if (!showCorrect) {
-                tvChoice1.setBackgroundColor(resources.getColor(R.color.sw_yellow))
-                tvChoice2.setBackgroundColor(resources.getColor(R.color.grey))
-                tvChoice3.setBackgroundColor(resources.getColor(R.color.grey))
-                tvChoice4.setBackgroundColor(resources.getColor(R.color.grey))
+                tvChoice1.setBackgroundColor(yellowColor)
+                tvChoice2.setBackgroundColor(greyColor)
+                tvChoice3.setBackgroundColor(greyColor)
+                tvChoice4.setBackgroundColor(greyColor)
                 chosenAnswer = tvChoice1.text.toString()
             }
         }
         mcChoice2.setOnClickListener {
             if (!showCorrect) {
-                tvChoice2.setBackgroundColor(resources.getColor(R.color.sw_yellow))
-                tvChoice1.setBackgroundColor(resources.getColor(R.color.grey))
-                tvChoice3.setBackgroundColor(resources.getColor(R.color.grey))
-                tvChoice4.setBackgroundColor(resources.getColor(R.color.grey))
+                tvChoice2.setBackgroundColor(yellowColor)
+                tvChoice1.setBackgroundColor(greyColor)
+                tvChoice3.setBackgroundColor(greyColor)
+                tvChoice4.setBackgroundColor(greyColor)
                 chosenAnswer = tvChoice2.text.toString()
             }
         }
         mcChoice3.setOnClickListener {
             if (!showCorrect) {
-                tvChoice3.setBackgroundColor(resources.getColor(R.color.sw_yellow))
-                tvChoice1.setBackgroundColor(resources.getColor(R.color.grey))
-                tvChoice2.setBackgroundColor(resources.getColor(R.color.grey))
-                tvChoice4.setBackgroundColor(resources.getColor(R.color.grey))
+                tvChoice3.setBackgroundColor(yellowColor)
+                tvChoice1.setBackgroundColor(greyColor)
+                tvChoice2.setBackgroundColor(greyColor)
+                tvChoice4.setBackgroundColor(greyColor)
                 chosenAnswer = tvChoice3.text.toString()
             }
         }
         mcChoice4.setOnClickListener {
             if (!showCorrect) {
-                tvChoice4.setBackgroundColor(resources.getColor(R.color.sw_yellow))
-                tvChoice1.setBackgroundColor(resources.getColor(R.color.grey))
-                tvChoice2.setBackgroundColor(resources.getColor(R.color.grey))
-                tvChoice3.setBackgroundColor(resources.getColor(R.color.grey))
+                tvChoice4.setBackgroundColor(yellowColor)
+                tvChoice1.setBackgroundColor(greyColor)
+                tvChoice2.setBackgroundColor(greyColor)
+                tvChoice3.setBackgroundColor(greyColor)
                 chosenAnswer = tvChoice4.text.toString()
             }
         }
@@ -225,10 +227,10 @@ class QuizQuestionMCFragment : Fragment(R.layout.fragment_quiz_question_mc){
                 Log.d("QuizQuestionMCFragment", "No answer selected")
                 showCorrect = true
                 when (args.questionContents.correctAnswer) {
-                    tvChoice1.text.toString() -> tvChoice1.setBackgroundColor(resources.getColor(R.color.sw_green))
-                    tvChoice2.text.toString() -> tvChoice2.setBackgroundColor(resources.getColor(R.color.sw_green))
-                    tvChoice3.text.toString() -> tvChoice3.setBackgroundColor(resources.getColor(R.color.sw_green))
-                    tvChoice4.text.toString() -> tvChoice4.setBackgroundColor(resources.getColor(R.color.sw_green))
+                    tvChoice1.text.toString() -> tvChoice1.setBackgroundColor(greenColor)
+                    tvChoice2.text.toString() -> tvChoice2.setBackgroundColor(greenColor)
+                    tvChoice3.text.toString() -> tvChoice3.setBackgroundColor(greenColor)
+                    tvChoice4.text.toString() -> tvChoice4.setBackgroundColor(greenColor)
                 }
             }
         }
@@ -428,10 +430,10 @@ class QuizQuestionMCFragment : Fragment(R.layout.fragment_quiz_question_mc){
                 Log.d("QuizQuestionMCFragment", "No answer selected")
                 showCorrect = true
                 when (args.questionContents.correctAnswer) {
-                    tvChoice1.text.toString() -> tvChoice1.setBackgroundColor(resources.getColor(R.color.sw_green))
-                    tvChoice2.text.toString() -> tvChoice2.setBackgroundColor(resources.getColor(R.color.sw_green))
-                    tvChoice3.text.toString() -> tvChoice3.setBackgroundColor(resources.getColor(R.color.sw_green))
-                    tvChoice4.text.toString() -> tvChoice4.setBackgroundColor(resources.getColor(R.color.sw_green))
+                    tvChoice1.text.toString() -> tvChoice1.setBackgroundColor(redColor)
+                    tvChoice2.text.toString() -> tvChoice2.setBackgroundColor(redColor)
+                    tvChoice3.text.toString() -> tvChoice3.setBackgroundColor(redColor)
+                    tvChoice4.text.toString() -> tvChoice4.setBackgroundColor(redColor)
                 }
             }
         }
@@ -448,11 +450,11 @@ class QuizQuestionMCFragment : Fragment(R.layout.fragment_quiz_question_mc){
         planetDetailsViewModel.loadSWAPIPlanetDetails(1)
     }
 
-    private fun generateRandomNumber(range: IntRange, excludedNumber: Int): Int {
+    private fun generateRandomNumber(range: IntRange): Int {
         var randomNumber: Int
         do {
             randomNumber = Random.nextInt(range.first, range.last + 1)
-        } while (randomNumber == excludedNumber)
+        } while (randomNumber == 17)
         return randomNumber
     }
 }
