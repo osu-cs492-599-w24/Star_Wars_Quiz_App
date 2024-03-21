@@ -6,14 +6,14 @@ import com.squareup.moshi.ToJson
 
 
 data class PlanetDetails(
-    val diameter: String,
-    val rotationPeriod: String,
-    val orbitalPeriod: String,
+    val diameter: Int,
+    val rotationPeriod: Int,
+    val orbitalPeriod: Int,
     val gravity: String,
-    val population: String,
+    val population: Int,
     val climate: String,
     val terrain: String,
-    val surfaceWater: String,
+    val surfaceWater: Int,
     val name: String,
 )
 @JsonClass(generateAdapter = true)
@@ -42,14 +42,14 @@ data class SWAPIPlanetDetailsJson(
 class SWAPIPlanetInfoAdapter {
     @FromJson
     fun planetDetailsFromJson(planetDetails: SWAPIPlanetIResultJson) = PlanetDetails(
-        diameter = planetDetails.result.properties.diameter,
-        rotationPeriod = planetDetails.result.properties.rotation_period,
-        orbitalPeriod = planetDetails.result.properties.orbital_period,
+        diameter = planetDetails.result.properties.diameter.toInt(),
+        rotationPeriod = planetDetails.result.properties.rotation_period.toInt(),
+        orbitalPeriod = planetDetails.result.properties.orbital_period.toInt(),
         gravity = planetDetails.result.properties.gravity,
-        population = planetDetails.result.properties.population,
+        population = planetDetails.result.properties.population.toInt(),
         climate = planetDetails.result.properties.climate,
         terrain = planetDetails.result.properties.terrain,
-        surfaceWater = planetDetails.result.properties.surface_water,
+        surfaceWater = planetDetails.result.properties.surface_water.toInt(),
         name = planetDetails.result.properties.name,
     )
 
