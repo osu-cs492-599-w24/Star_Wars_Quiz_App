@@ -87,6 +87,10 @@ class QuizQuestionMCFragment : Fragment(R.layout.fragment_quiz_question_mc){
         loadingIndicator = view.findViewById(R.id.loading_indicator)
         mcPageView = view.findViewById(R.id.question_mc_layout)
 
+        // Hide the nav bar in the main activity
+        val bottomNavBar = requireActivity().findViewById<View>(R.id.bottom_nav)
+        bottomNavBar.visibility = View.GONE
+
         /*
             perform logic below
 

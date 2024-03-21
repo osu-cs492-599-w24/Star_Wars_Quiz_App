@@ -4,16 +4,12 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
-import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.starwarsquiz.R
 import com.example.starwarsquiz.data.QuizScoreEntity
-import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class ScoreHistoryFragment : Fragment(R.layout.fragment_score_history) {
     private val adapter = ScoreListAdapter(::onScoreClick)
@@ -25,16 +21,10 @@ class ScoreHistoryFragment : Fragment(R.layout.fragment_score_history) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // set up bottom nav menu
-        val navController = findNavController()
-        val bottomNav: BottomNavigationView = view.findViewById(R.id.bottom_nav)
-        bottomNav.setupWithNavController(navController)
-        bottomNav.setOnApplyWindowInsetsListener { myView, insets ->
-            myView.updatePadding(bottom = 0)
-            insets
-        }
-
         clearHistoryButton = view.findViewById(R.id.button_clear_history)
+
+        val bottomNavBar = requireActivity().findViewById<View>(R.id.bottom_nav)
+        bottomNavBar.visibility = View.VISIBLE
 
         scoresRV = view.findViewById(R.id.rv_scores)
         scoresRV.layoutManager = LinearLayoutManager(requireContext())

@@ -5,11 +5,9 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
-import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.setupWithNavController
 import com.example.starwarsquiz.R
 import com.example.starwarsquiz.data.CharacterDetails
 import com.example.starwarsquiz.data.PlanetDetails
@@ -41,20 +39,14 @@ class LandingPageFragment : Fragment(R.layout.fragment_landing_page){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // set up bottom nav menu
-        val navController = findNavController()
-        val bottomNav: BottomNavigationView = view.findViewById(R.id.bottom_nav)
-        bottomNav.setupWithNavController(navController)
-        bottomNav.setOnApplyWindowInsetsListener { myView, insets ->
-            myView.updatePadding(bottom = 0)
-            insets
-        }
-
 
         landingPageView = view.findViewById(R.id.landing_page_layout)
         startButton = view.findViewById(R.id.start_button)
         loadingIndicator = view.findViewById(R.id.loading_indicator)
         loadingErrorTV = view.findViewById(R.id.tv_loading_error)
+
+        val bottomNavBar = requireActivity().findViewById<View>(R.id.bottom_nav)
+        bottomNavBar.visibility = View.VISIBLE
 
         // Wait for both character and planet details to be loaded before starting the quiz
         characterDetailsViewModel.loading.observe(viewLifecycleOwner) { loadCharacter ->
