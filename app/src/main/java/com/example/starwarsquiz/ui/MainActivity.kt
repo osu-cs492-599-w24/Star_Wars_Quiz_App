@@ -13,7 +13,7 @@ class MainActivity : AppCompatActivity() {
     private val planetDetailsViewModel: SWAPIPlanetDetailsViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        enableEdgeToEdge()
+//        enableEdgeToEdge()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 

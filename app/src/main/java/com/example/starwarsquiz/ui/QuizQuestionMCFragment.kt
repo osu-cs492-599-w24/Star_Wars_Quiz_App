@@ -48,6 +48,7 @@ class QuizQuestionMCFragment : Fragment(R.layout.fragment_quiz_question_mc){
 
     private lateinit var loadingIndicator: CircularProgressIndicator
     private lateinit var MCPageView: View
+    private lateinit var loadingErrorTV: TextView
 
     private var characterList: List<SWAPICharacter>? = null
     private var characterDetails: CharacterDetails? = null
@@ -143,6 +144,20 @@ class QuizQuestionMCFragment : Fragment(R.layout.fragment_quiz_question_mc){
                     } else {
                         loadingIndicator.visibility = View.INVISIBLE
                         MCPageView.visibility = View.VISIBLE
+                    }
+                }
+            }
+        }
+
+        characterDetailsViewModel.error.observe(viewLifecycleOwner) { error ->
+            if (error != null) {
+                planetDetailsViewModel.error.observe(viewLifecycleOwner) { error ->
+                    if (error != null) {
+                        loadingErrorTV.text = getString(R.string.loading_error, error.message)
+                        loadingErrorTV.visibility = View.VISIBLE
+                        MCPageView.visibility = View.INVISIBLE
+                        Log.e("LandingPageFragment",
+                            "Error fetching from API: ${error.message}")
                     }
                 }
             }

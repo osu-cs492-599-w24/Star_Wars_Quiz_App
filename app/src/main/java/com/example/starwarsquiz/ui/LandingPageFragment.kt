@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -35,6 +36,8 @@ class LandingPageFragment : Fragment(R.layout.fragment_landing_page){
     private var listSize = 1..50
     private val randomNumber = generateRandomNumber(listSize, 17)
     private lateinit var loadingIndicator: CircularProgressIndicator
+    private lateinit var loadingErrorTV: TextView
+
     private lateinit var landingPageView: View
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -44,6 +47,7 @@ class LandingPageFragment : Fragment(R.layout.fragment_landing_page){
         startButton = view.findViewById(R.id.start_button)
         historyButton = view.findViewById(R.id.button_score_history)
         loadingIndicator = view.findViewById(R.id.loading_indicator)
+        loadingErrorTV = view.findViewById(R.id.tv_loading_error)
 
 //        characterListViewModel.characterResults.observe(viewLifecycleOwner) { CharacterList ->
 //            if (CharacterList != null) {
@@ -69,6 +73,19 @@ class LandingPageFragment : Fragment(R.layout.fragment_landing_page){
             }
         }
 
+        characterDetailsViewModel.error.observe(viewLifecycleOwner) { error ->
+            if (error != null) {
+                planetDetailsViewModel.error.observe(viewLifecycleOwner) { error ->
+                    if (error != null) {
+                        loadingErrorTV.text = getString(R.string.loading_error, error.message)
+                        loadingErrorTV.visibility = View.VISIBLE
+                        landingPageView.visibility = View.INVISIBLE
+                        Log.e("LandingPageFragment",
+                            "Error fetching from API: ${error.message}")
+                    }
+                }
+            }
+        }
 
         characterDetailsViewModel.characterDetails.observe(viewLifecycleOwner) { character ->
             if (character != null) {
