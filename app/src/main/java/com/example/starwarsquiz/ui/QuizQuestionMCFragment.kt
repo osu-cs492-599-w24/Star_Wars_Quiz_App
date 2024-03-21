@@ -294,7 +294,7 @@ class QuizQuestionMCFragment : Fragment(R.layout.fragment_quiz_question_mc){
                             nextScore,
                             "Who was Starkiller's master?",
                             people[4-1].name,
-                            listOf(people[1-1].name, people[11-1].name, people[10-1].name, people[4-1].name)
+                            listOf(people[1-1].name, people[32-1].name, people[10-1].name, people[4-1].name)
 
                         )
 
