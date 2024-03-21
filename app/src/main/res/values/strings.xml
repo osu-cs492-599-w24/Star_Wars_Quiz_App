@@ -3,7 +3,7 @@
 
     <string name="loading_error">Unable to fetch API data. Error message: %1$s</string>
 
-    <string name="start">Start Quiz</string>
+    <string name="start">Start</string>
     <string name="previous">Previous</string>
     <string name="next">Next</string>
     <string name="submit">Submit</string>

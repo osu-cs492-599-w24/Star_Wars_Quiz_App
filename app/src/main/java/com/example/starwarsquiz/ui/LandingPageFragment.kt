@@ -6,9 +6,11 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.setupWithNavController
 import com.example.starwarsquiz.R
 import com.example.starwarsquiz.data.CharacterDetails
 import com.example.starwarsquiz.data.PlanetDetails
@@ -17,6 +19,7 @@ import com.example.starwarsquiz.data.QuestionContents
 import com.example.starwarsquiz.data.SWAPICharacter
 import kotlin.random.Random
 import com.example.starwarsquiz.data.SWAPIPlanet
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.progressindicator.CircularProgressIndicator
 
 class LandingPageFragment : Fragment(R.layout.fragment_landing_page){
@@ -24,7 +27,6 @@ class LandingPageFragment : Fragment(R.layout.fragment_landing_page){
     private val planetsViewModel: SWAPIPlanetViewModel by viewModels()
 
     private lateinit var startButton: Button
-    private lateinit var historyButton: Button
 
     private val characterDetailsViewModel: SWAPICharacterDetailsViewModel by viewModels()
     private val planetDetailsViewModel: SWAPIPlanetDetailsViewModel by viewModels()
@@ -41,9 +43,18 @@ class LandingPageFragment : Fragment(R.layout.fragment_landing_page){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // set up bottom nav menu
+        val navController = findNavController()
+        val bottomNav: BottomNavigationView = view.findViewById(R.id.bottom_nav)
+        bottomNav.setupWithNavController(navController)
+        bottomNav.setOnApplyWindowInsetsListener { myView, insets ->
+            myView.updatePadding(bottom = 0)
+            insets
+        }
+
+
         landingPageView = view.findViewById(R.id.landing_page_layout)
         startButton = view.findViewById(R.id.start_button)
-        historyButton = view.findViewById(R.id.button_score_history)
         loadingIndicator = view.findViewById(R.id.loading_indicator)
         loadingErrorTV = view.findViewById(R.id.tv_loading_error)
 
@@ -119,12 +130,6 @@ class LandingPageFragment : Fragment(R.layout.fragment_landing_page){
             val action = LandingPageFragmentDirections.navigateToQuizQuestionMc(newArgs)
             findNavController().navigate(action)
         }
-
-        historyButton.setOnClickListener {
-            val action = LandingPageFragmentDirections.navigateToScoreHistory()
-            findNavController().navigate(action)
-        }
-
     }
 
     override fun onResume() {
