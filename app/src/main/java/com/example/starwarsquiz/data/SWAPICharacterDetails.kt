@@ -1,5 +1,6 @@
 package com.example.starwarsquiz.data
 
+import android.util.Log
 import com.squareup.moshi.FromJson
 import com.squareup.moshi.JsonClass
 import com.squareup.moshi.ToJson
@@ -14,7 +15,7 @@ data class CharacterDetails(
     val birthYear: String,
     val gender: String,
     val name: String,
-    val homeworldUrl: String,
+    val homeworldId: Int,
 )
 @JsonClass(generateAdapter = true)
 data class SWAPICharacterResultJson(
@@ -50,8 +51,17 @@ class SWAPICharacterInfoAdapter {
         birthYear = characterDetails.result.properties.birth_year,
         gender = characterDetails.result.properties.gender,
         name = characterDetails.result.properties.name,
-        homeworldUrl = characterDetails.result.properties.homeworld
+        homeworldId = parseHomeworldURL(characterDetails.result.properties.homeworld)
     )
+
+    private fun parseHomeworldURL(url: String): Int {
+        val lastIndex = url.lastIndexOf("/")
+
+        val id = url.substring(lastIndex + 1).toInt()
+        Log.d("SWAPI", "homworldID ${id}")
+
+        return id
+    }
 
     @ToJson
     fun characterDetailsToJson(characterDetails: CharacterDetails): String {

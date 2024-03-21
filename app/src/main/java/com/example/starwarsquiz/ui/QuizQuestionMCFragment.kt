@@ -5,7 +5,6 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
-import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -15,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.starwarsquiz.R
 import com.example.starwarsquiz.data.CharacterDetails
+import com.example.starwarsquiz.data.PlanetDetails
 import com.example.starwarsquiz.data.QuestionContents
 import com.example.starwarsquiz.data.SWAPICharacter
 import kotlin.random.Random
@@ -40,13 +40,13 @@ class QuizQuestionMCFragment : Fragment(R.layout.fragment_quiz_question_mc){
 
     private var characterList: List<SWAPICharacter>? = null
     private var characterDetails: CharacterDetails? = null
-    private var listSize = 50
-    private val randomNumber = Random.nextInt(listSize) - 1
+    private var planetDetails: PlanetDetails? = null
+    private var listSize = 1..50
+    private val randomNumber = generateRandomNumber(listSize, 17)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        characterListViewModel.loadSWAPICharacters(1, listSize)
-        characterDetailsViewModel.loadSWAPICharactersDetails(randomNumber)
+//        characterListViewModel.loadSWAPICharacters(1, listSize.last)
 
         questionNumTV = view.findViewById(R.id.tv_quiz_question_num)
         currentScoreTV = view.findViewById(R.id.tv_quiz_current_score)
@@ -89,13 +89,13 @@ class QuizQuestionMCFragment : Fragment(R.layout.fragment_quiz_question_mc){
         // Set answer list
         adapter.updateAnswerList(args.questionContents.answerChoices)
 
-        characterListViewModel.characterResults.observe(viewLifecycleOwner) { CharacterList ->
-            if (CharacterList != null) {
-                characterList = CharacterList
-            } else {
-                Log.d("MCFragment", "character list is null")
-            }
-        }
+//        characterListViewModel.characterResults.observe(viewLifecycleOwner) { CharacterList ->
+//            if (CharacterList != null) {
+//                characterList = CharacterList
+//            } else {
+//                Log.d("MCFragment", "character list is null")
+//            }
+//        }
 
         characterDetailsViewModel.characterDetails.observe(viewLifecycleOwner) { character ->
             if (character != null) {
@@ -104,6 +104,15 @@ class QuizQuestionMCFragment : Fragment(R.layout.fragment_quiz_question_mc){
                 Log.d("MCFragment", "character details is null")
             }
         }
+
+        planetDetailsViewModel.planetDetails.observe(viewLifecycleOwner) { planet ->
+            if (planet != null) {
+                planetDetails = planet
+            } else {
+                Log.d("MCFragment", "planet details is null")
+            }
+        }
+
 
         // Submit button goes to results screen
         submitButton.setOnClickListener {
@@ -127,14 +136,13 @@ class QuizQuestionMCFragment : Fragment(R.layout.fragment_quiz_question_mc){
                 // If answer is incorrect, do not increment score
                 args.questionContents.currentScore
             }
-            Log.d("MCFragment", "List: ${characterList}")
 
             val newArgs = QuestionContents(
                 args.questionContents.quizNumber + 1,
                 nextScore,
-                "What is the Homeworld of ${characterList?.get(randomNumber)?.name}",
-                "${characterDetails?.homeworldUrl}",
-                listOf("${characterDetails?.homeworldUrl}", "ANSWER 2", "ANSWER 3", "ANSWER 4")
+                "What is the Homeworld of ${characterDetails?.name}",
+                "${planetDetails?.name}",
+                listOf("${planetDetails?.name}", "ANSWER 2", "ANSWER 3", "ANSWER 4")
             )
 
             val action = QuizQuestionMCFragmentDirections.navigateToQuizQuestionMc(newArgs)
@@ -142,5 +150,22 @@ class QuizQuestionMCFragment : Fragment(R.layout.fragment_quiz_question_mc){
         }
 
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        characterDetailsViewModel.loadSWAPICharactersDetails(randomNumber)
+
+//        characterDetails?.homeworldId?.let { planetDetailsViewModel.loadSWAPIPlanetDetails(it) }
+        planetDetailsViewModel.loadSWAPIPlanetDetails(1)
+    }
+
+    private fun generateRandomNumber(range: IntRange, excludedNumber: Int): Int {
+        var randomNumber: Int
+        do {
+            randomNumber = Random.nextInt(range.first, range.last + 1)
+        } while (randomNumber == excludedNumber)
+        return randomNumber
     }
 }
