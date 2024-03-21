@@ -96,7 +96,7 @@ class LandingPageFragment : Fragment(R.layout.fragment_landing_page){
                 quizNumber = 1,
                 currentScore = 0,
                 question = "What planet is Darth Maul from?",
-                correctAnswer = planet[36-1].name,
+                        correctAnswer = planet[36-1].name,
                 answerChoices = listOf(planet[1-1].name, planet[36-1].name, planet[14-1].name, planet[8-1].name)
             )
             val action = LandingPageFragmentDirections.navigateToQuizQuestionMc(newArgs)

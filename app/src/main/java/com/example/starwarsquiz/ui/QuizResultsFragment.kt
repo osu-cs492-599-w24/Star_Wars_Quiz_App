@@ -2,6 +2,7 @@ package com.example.starwarsquiz.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
@@ -12,14 +13,21 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.starwarsquiz.R
+import com.example.starwarsquiz.data.CharacterDetails
+import com.example.starwarsquiz.data.PlanetDetails
 import com.example.starwarsquiz.data.QuestionContents
 import com.example.starwarsquiz.data.QuizScoreEntity
+import com.example.starwarsquiz.data.SWAPIPlanet
+import kotlin.random.Random
 
 class QuizResultsFragment : Fragment(R.layout.fragment_quiz_results) {
     private val args: QuizResultsFragmentArgs by navArgs()
 
     // declare necessary view models here
     private val quizScoreViewModel: QuizScoreViewModel by viewModels()
+    private val characterDetailsViewModel: SWAPICharacterDetailsViewModel by viewModels()
+    private val planetDetailsViewModel: SWAPIPlanetDetailsViewModel by viewModels()
+    private val planetsViewModel: SWAPIPlanetViewModel by viewModels()
 
     private lateinit var finalScoreTV: TextView
     private lateinit var highestScoreTV: TextView
@@ -28,6 +36,11 @@ class QuizResultsFragment : Fragment(R.layout.fragment_quiz_results) {
     private lateinit var historyButton: Button
     private lateinit var shareButton: ImageButton
     private lateinit var rewardVV: VideoView
+
+    private var characterDetails: CharacterDetails? = null
+    private var planetDetails: PlanetDetails? = null
+    private var listSize = 1..50
+    private val randomNumber = generateRandomNumber(listSize, 17)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -45,14 +58,42 @@ class QuizResultsFragment : Fragment(R.layout.fragment_quiz_results) {
             eg. navigate to home on home btn click or first question on restart btn click
          */
 
+        characterDetailsViewModel.characterDetails.observe(viewLifecycleOwner) { character ->
+            if (character != null) {
+                characterDetails = character
+            } else {
+                Log.d("MCFragment", "character details is null")
+            }
+        }
+
+        planetDetailsViewModel.planetDetails.observe(viewLifecycleOwner) { planet ->
+            if (planet != null) {
+                planetDetails = planet
+                Log.d("MCFragment", "planet details is not null")
+            } else {
+                Log.d("MCFragment", "planet details is null")
+            }
+        }
+        planetsViewModel.loadSWAPIPlanets(1, 40)
+        var planet = listOf<SWAPIPlanet>()
+
         // Restart button goes to first question
         restartButton.setOnClickListener {
+            planetsViewModel.planetList.observe(viewLifecycleOwner) { planetList->
+                if(planetList != null){
+                    planet = planetList
+                }
+                else{
+                    Log.d("LandingPageFragment", "planetList is empty")
+                }
+            }
+
             val newArgs = QuestionContents(
                 1,
                 0,
-                "REPLACE ME WITH AN ACTUAL QUESTION",
-                "ANSWER 1",
-                listOf("ANSWER 1", "ANSWER 2", "ANSWER 3", "ANSWER 4")
+                question = "What planet is Darth Maul from?",
+                correctAnswer = planet[36-1].name,
+                answerChoices = listOf(planet[1-1].name, planet[36-1].name, planet[14-1].name, planet[8-1].name)
             )
             val action = QuizResultsFragmentDirections.navigateToQuizQuestionMc(newArgs)
             findNavController().navigate(action)
@@ -122,5 +163,13 @@ class QuizResultsFragment : Fragment(R.layout.fragment_quiz_results) {
             else -> R.raw.highground
         }
         return "android.resource://" + requireActivity().packageName + "/" + videoResource
+    }
+
+    private fun generateRandomNumber(range: IntRange, excludedNumber: Int): Int {
+        var randomNumber: Int
+        do {
+            randomNumber = Random.nextInt(range.first, range.last + 1)
+        } while (randomNumber == excludedNumber)
+        return randomNumber
     }
 }
