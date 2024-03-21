@@ -97,6 +97,22 @@ class QuizQuestionMCFragment : Fragment(R.layout.fragment_quiz_question_mc){
 //            }
 //        }
 
+        // Wait for both character and planet details to be loaded before starting the quiz
+        val oldNextVisibility = nextButton.visibility
+        val oldSubmitVisibility = submitButton.visibility
+        nextButton.visibility = View.INVISIBLE
+        submitButton.visibility = View.INVISIBLE
+        characterDetailsViewModel.loading.observe(viewLifecycleOwner) { loading ->
+            if (!loading) {
+                planetDetailsViewModel.loading.observe(viewLifecycleOwner) { loading ->
+                    if (!loading) {
+                        nextButton.visibility = oldNextVisibility
+                        submitButton.visibility = oldSubmitVisibility
+                    }
+                }
+            }
+        }
+
         characterDetailsViewModel.characterDetails.observe(viewLifecycleOwner) { character ->
             if (character != null) {
                 characterDetails = character

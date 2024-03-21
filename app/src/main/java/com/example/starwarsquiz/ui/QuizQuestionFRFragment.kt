@@ -11,13 +11,20 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.starwarsquiz.R
+import com.example.starwarsquiz.data.CharacterDetails
+import com.example.starwarsquiz.data.PlanetDetails
 import com.example.starwarsquiz.data.QuestionContents
+import com.example.starwarsquiz.data.SWAPICharacter
+import kotlin.random.Random
 
 class QuizQuestionFRFragment : Fragment(R.layout.fragment_quiz_question_fr) {
     private val args: QuizQuestionFRFragmentArgs by navArgs()
 
     // declare necessary view models here
     private val quizScoreViewModel: QuizScoreViewModel by viewModels()
+    private val characterListViewModel: SWAPICharacterViewModel by viewModels()
+    private val characterDetailsViewModel: SWAPICharacterDetailsViewModel by viewModels()
+    private val planetDetailsViewModel: SWAPIPlanetDetailsViewModel by viewModels()
 
     private lateinit var questionNumTV: TextView
     private lateinit var currentScoreTV: TextView
@@ -25,6 +32,12 @@ class QuizQuestionFRFragment : Fragment(R.layout.fragment_quiz_question_fr) {
     private lateinit var answerET: EditText
     private lateinit var submitButton: Button
     private lateinit var nextButton: Button
+
+    private var characterList: List<SWAPICharacter>? = null
+    private var characterDetails: CharacterDetails? = null
+    private var planetDetails: PlanetDetails? = null
+    private var listSize = 1..50
+    private val randomNumber = generateRandomNumber(listSize, 17)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -58,6 +71,21 @@ class QuizQuestionFRFragment : Fragment(R.layout.fragment_quiz_question_fr) {
 
         // Set current score
         currentScoreTV.text = args.questionContents.currentScore.toString()
+
+        val oldNextVisibility = nextButton.visibility
+        val oldSubmitVisibility = submitButton.visibility
+        nextButton.visibility = View.INVISIBLE
+        submitButton.visibility = View.INVISIBLE
+        characterDetailsViewModel.loading.observe(viewLifecycleOwner) { loading ->
+            if (!loading) {
+                planetDetailsViewModel.loading.observe(viewLifecycleOwner) { loading ->
+                    if (!loading) {
+                        nextButton.visibility = oldNextVisibility
+                        submitButton.visibility = oldSubmitVisibility
+                    }
+                }
+            }
+        }
 
         // Submit button goes to results screen
         submitButton.setOnClickListener {
@@ -102,5 +130,21 @@ class QuizQuestionFRFragment : Fragment(R.layout.fragment_quiz_question_fr) {
             val action = QuizQuestionFRFragmentDirections.navigateToQuizQuestionMc(newArgs)
             findNavController().navigate(action)
         }
+    }
+    override fun onResume() {
+        super.onResume()
+
+        characterDetailsViewModel.loadSWAPICharactersDetails(randomNumber)
+
+//        characterDetails?.homeworldId?.let { planetDetailsViewModel.loadSWAPIPlanetDetails(it) }
+        planetDetailsViewModel.loadSWAPIPlanetDetails(1)
+    }
+
+    private fun generateRandomNumber(range: IntRange, excludedNumber: Int): Int {
+        var randomNumber: Int
+        do {
+            randomNumber = Random.nextInt(range.first, range.last + 1)
+        } while (randomNumber == excludedNumber)
+        return randomNumber
     }
 }

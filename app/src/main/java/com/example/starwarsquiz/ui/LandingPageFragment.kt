@@ -46,6 +46,18 @@ class LandingPageFragment : Fragment(R.layout.fragment_landing_page){
 //            }
 //        }
 
+        // Wait for both character and planet details to be loaded before starting the quiz
+        startButton.visibility = View.INVISIBLE
+        characterDetailsViewModel.loading.observe(viewLifecycleOwner) { loading ->
+            if (!loading) {
+                planetDetailsViewModel.loading.observe(viewLifecycleOwner) { loading ->
+                    if (!loading) {
+                        startButton.visibility = View.VISIBLE
+                    }
+                }
+            }
+        }
+
         characterDetailsViewModel.characterDetails.observe(viewLifecycleOwner) { character ->
             if (character != null) {
                 characterDetails = character
