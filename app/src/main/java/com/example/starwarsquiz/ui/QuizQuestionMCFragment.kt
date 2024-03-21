@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -13,13 +14,19 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.starwarsquiz.R
+import com.example.starwarsquiz.data.CharacterDetails
 import com.example.starwarsquiz.data.QuestionContents
+import com.example.starwarsquiz.data.SWAPICharacter
+import kotlin.random.Random
 
 class QuizQuestionMCFragment : Fragment(R.layout.fragment_quiz_question_mc){
     private val args: QuizQuestionMCFragmentArgs by navArgs()
 
     // declare necessary view models here
     private val quizScoreViewModel: QuizScoreViewModel by viewModels()
+    private val characterListViewModel: SWAPICharacterViewModel by viewModels()
+    private val characterDetailsViewModel: SWAPICharacterDetailsViewModel by viewModels()
+    private val planetDetailsViewModel: SWAPIPlanetDetailsViewModel by viewModels()
 
     // stores list of possible answers to this question
     private val adapter = MCAnswerListAdapter()
@@ -31,8 +38,15 @@ class QuizQuestionMCFragment : Fragment(R.layout.fragment_quiz_question_mc){
     private lateinit var submitButton: Button
     private lateinit var nextButton: Button
 
+    private var characterList: List<SWAPICharacter>? = null
+    private var characterDetails: CharacterDetails? = null
+    private var listSize = 50
+    private val randomNumber = Random.nextInt(listSize) - 1
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        characterListViewModel.loadSWAPICharacters(1, listSize)
+        characterDetailsViewModel.loadSWAPICharactersDetails(randomNumber)
 
         questionNumTV = view.findViewById(R.id.tv_quiz_question_num)
         currentScoreTV = view.findViewById(R.id.tv_quiz_current_score)
@@ -75,6 +89,21 @@ class QuizQuestionMCFragment : Fragment(R.layout.fragment_quiz_question_mc){
         // Set answer list
         adapter.updateAnswerList(args.questionContents.answerChoices)
 
+        characterListViewModel.characterResults.observe(viewLifecycleOwner) { CharacterList ->
+            if (CharacterList != null) {
+                characterList = CharacterList
+            } else {
+                Log.d("MCFragment", "character list is null")
+            }
+        }
+
+        characterDetailsViewModel.characterDetails.observe(viewLifecycleOwner) { character ->
+            if (character != null) {
+                characterDetails = character
+            } else {
+                Log.d("MCFragment", "character details is null")
+            }
+        }
 
         // Submit button goes to results screen
         submitButton.setOnClickListener {
@@ -98,16 +127,17 @@ class QuizQuestionMCFragment : Fragment(R.layout.fragment_quiz_question_mc){
                 // If answer is incorrect, do not increment score
                 args.questionContents.currentScore
             }
+            Log.d("MCFragment", "List: ${characterList}")
 
             val newArgs = QuestionContents(
                 args.questionContents.quizNumber + 1,
                 nextScore,
-                "REPLACE ME WITH AN ACTUAL QUESTION",
-                "ANSWER 1",
-                listOf("ANSWER 1", "ANSWER 2", "ANSWER 3", "ANSWER 4")
+                "What is the Homeworld of ${characterList?.get(randomNumber)?.name}",
+                "${characterDetails?.homeworldUrl}",
+                listOf("${characterDetails?.homeworldUrl}", "ANSWER 2", "ANSWER 3", "ANSWER 4")
             )
 
-            val action = QuizQuestionMCFragmentDirections.navigateToQuizQuestionFr(newArgs)
+            val action = QuizQuestionMCFragmentDirections.navigateToQuizQuestionMc(newArgs)
             findNavController().navigate(action)
         }
 
