@@ -363,4 +363,3 @@ class QuizQuestionFRFragment : Fragment(R.layout.fragment_quiz_question_fr) {
         return randomNumber
     }
 }
-}
