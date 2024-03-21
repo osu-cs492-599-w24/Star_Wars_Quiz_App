@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.starwarsquiz.R
 import com.example.starwarsquiz.data.QuestionContents
+import com.google.android.material.card.MaterialCardView
 
 class QuizQuestionMCFragment : Fragment(R.layout.fragment_quiz_question_mc){
     private val args: QuizQuestionMCFragmentArgs by navArgs()
@@ -22,27 +23,46 @@ class QuizQuestionMCFragment : Fragment(R.layout.fragment_quiz_question_mc){
     private val quizScoreViewModel: QuizScoreViewModel by viewModels()
 
     // stores list of possible answers to this question
-    private val adapter = MCAnswerListAdapter()
+//    private val adapter = MCAnswerListAdapter()
 
     private lateinit var questionNumTV: TextView
     private lateinit var currentScoreTV: TextView
     private lateinit var questionTV: TextView
-    private lateinit var answerListRV: RecyclerView
+//    private lateinit var answerListRV: RecyclerView
     private lateinit var submitButton: Button
     private lateinit var nextButton: Button
+
+    private lateinit var mcChoice1: MaterialCardView
+    private lateinit var tvChoice1: TextView
+    private lateinit var mcChoice2: MaterialCardView
+    private lateinit var tvChoice2: TextView
+    private lateinit var mcChoice3: MaterialCardView
+    private lateinit var tvChoice3: TextView
+    private lateinit var mcChoice4: MaterialCardView
+    private lateinit var tvChoice4: TextView
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        var chosenAnswer = ""
+
         questionNumTV = view.findViewById(R.id.tv_quiz_question_num)
         currentScoreTV = view.findViewById(R.id.tv_quiz_current_score)
         questionTV = view.findViewById(R.id.tv_quiz_question)
-        answerListRV = view.findViewById(R.id .rv_quiz_question_answers)
+//        answerListRV = view.findViewById(R.id .rv_quiz_question_answers)
         submitButton = view.findViewById(R.id.button_submit)
         nextButton = view.findViewById(R.id.button_next)
+        mcChoice1 = view.findViewById(R.id.mc_mc_answer1)
+        tvChoice1 = view.findViewById(R.id.tv_mc_answer1)
+        mcChoice2 = view.findViewById(R.id.mc_mc_answer2)
+        tvChoice2 = view.findViewById(R.id.tv_mc_answer2)
+        mcChoice3 = view.findViewById(R.id.mc_mc_answer3)
+        tvChoice3 = view.findViewById(R.id.tv_mc_answer3)
+        mcChoice4 = view.findViewById(R.id.mc_mc_answer4)
+        tvChoice4 = view.findViewById(R.id.tv_mc_answer4)
 
-        answerListRV.adapter = adapter
-        answerListRV.layoutManager = StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL)
+//        answerListRV.adapter = adapter
+//        answerListRV.layoutManager = StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL)
 
         /*
             perform logic below
@@ -73,12 +93,49 @@ class QuizQuestionMCFragment : Fragment(R.layout.fragment_quiz_question_mc){
         currentScoreTV.text = args.questionContents.currentScore.toString()
 
         // Set answer list
-        adapter.updateAnswerList(args.questionContents.answerChoices)
+//        adapter.updateAnswerList(args.questionContents.answerChoices)
+        tvChoice1.text = args.questionContents.answerChoices?.get(0) ?: "NO VALUE"
+        tvChoice2.text = args.questionContents.answerChoices?.get(1) ?: "NO VALUE"
+        tvChoice3.text = args.questionContents.answerChoices?.get(2) ?: "NO VALUE"
+        tvChoice4.text = args.questionContents.answerChoices?.get(3) ?: "NO VALUE"
 
+        // Set answer choice click listeners
+        // Color it yellow, uncolor the others
+        // Yes, getColor is deprecated. I don't care.
+        mcChoice1.setOnClickListener {
+            tvChoice1.setBackgroundColor(resources.getColor(R.color.sw_yellow))
+            tvChoice2.setBackgroundColor(resources.getColor(R.color.grey))
+            tvChoice3.setBackgroundColor(resources.getColor(R.color.grey))
+            tvChoice4.setBackgroundColor(resources.getColor(R.color.grey))
+            chosenAnswer = tvChoice1.text.toString()
+        }
+        mcChoice2.setOnClickListener {
+            tvChoice2.setBackgroundColor(resources.getColor(R.color.sw_yellow))
+            tvChoice1.setBackgroundColor(resources.getColor(R.color.grey))
+            tvChoice3.setBackgroundColor(resources.getColor(R.color.grey))
+            tvChoice4.setBackgroundColor(resources.getColor(R.color.grey))
+            chosenAnswer = tvChoice2.text.toString()
+        }
+        mcChoice3.setOnClickListener {
+            tvChoice3.setBackgroundColor(resources.getColor(R.color.sw_yellow))
+            tvChoice1.setBackgroundColor(resources.getColor(R.color.grey))
+            tvChoice2.setBackgroundColor(resources.getColor(R.color.grey))
+            tvChoice4.setBackgroundColor(resources.getColor(R.color.grey))
+            chosenAnswer = tvChoice3.text.toString()
+        }
+        mcChoice4.setOnClickListener {
+            tvChoice4.setBackgroundColor(resources.getColor(R.color.sw_yellow))
+            tvChoice1.setBackgroundColor(resources.getColor(R.color.grey))
+            tvChoice2.setBackgroundColor(resources.getColor(R.color.grey))
+            tvChoice3.setBackgroundColor(resources.getColor(R.color.grey))
+            chosenAnswer = tvChoice4.text.toString()
+        }
 
         // Submit button goes to results screen
         submitButton.setOnClickListener {
-            val score = if (true) { // TODO: Replace with actual answer comparison
+            Log.d("QuizQuestionMCFragment", "Chosen answer: $chosenAnswer")
+
+            val score = if (chosenAnswer == args.questionContents.correctAnswer) {
                 // If answer is correct, increment score
                 args.questionContents.currentScore + 1
             } else {
@@ -91,7 +148,9 @@ class QuizQuestionMCFragment : Fragment(R.layout.fragment_quiz_question_mc){
 
         // Next button goes to next question
         nextButton.setOnClickListener {
-            val nextScore = if (true) { // TODO: Replace with actual answer comparison
+            Log.d("QuizQuestionMCFragment", "Chosen answer: $chosenAnswer")
+
+            val nextScore = if (chosenAnswer == args.questionContents.correctAnswer) { // TODO: Replace with actual answer comparison
                 // If answer is correct, increment score
                 args.questionContents.currentScore + 1
             } else {

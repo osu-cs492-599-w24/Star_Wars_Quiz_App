@@ -24,8 +24,8 @@ class LandingPageFragment : Fragment(R.layout.fragment_landing_page){
                 1,
                 0,
                 "What planet is Darth Maul from?",
-                "",
-                listOf("", "", "", "")
+                "Tattooine",
+                listOf("Tattooine", "Jeff", "Jeb", "Jeb!")
             )
             val action = LandingPageFragmentDirections.navigateToQuizQuestionMc(newArgs)
             findNavController().navigate(action)
