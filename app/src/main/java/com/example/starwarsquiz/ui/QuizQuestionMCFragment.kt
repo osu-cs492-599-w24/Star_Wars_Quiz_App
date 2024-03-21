@@ -16,7 +16,6 @@ import com.example.starwarsquiz.data.QuestionContents
 import com.example.starwarsquiz.data.SWAPICharacter
 import com.example.starwarsquiz.data.SWAPIPlanet
 import com.google.android.material.card.MaterialCardView
-import com.example.starwarsquiz.data.SWAPICharacter
 import kotlin.random.Random
 
 class QuizQuestionMCFragment : Fragment(R.layout.fragment_quiz_question_mc){
