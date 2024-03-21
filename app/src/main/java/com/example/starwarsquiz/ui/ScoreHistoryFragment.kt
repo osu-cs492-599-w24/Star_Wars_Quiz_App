@@ -36,7 +36,7 @@ class ScoreHistoryFragment : Fragment(R.layout.fragment_score_history) {
         }
 
         clearHistoryButton.setOnClickListener {
-            viewModel.clearExceptHighestScores()
+            viewModel.clearScores()
         }
     }
 

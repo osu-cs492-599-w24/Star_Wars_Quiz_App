@@ -1,7 +1,6 @@
 package com.example.starwarsquiz.data
 
 import androidx.room.Dao
-import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import kotlinx.coroutines.flow.Flow
@@ -11,12 +10,8 @@ interface QuizScoreDao {
     @Insert
     suspend fun insert(score: QuizScoreEntity)
 
-    @Query(
-        "DELETE FROM QuizScoreEntity WHERE (score, timestamp) NOT IN (" +
-                "SELECT score, MAX(timestamp) FROM QuizScoreEntity WHERE score = (" +
-                "SELECT MAX(score) FROM QuizScoreEntity))"
-    )
-    suspend fun deleteAllExceptHighestScore()
+    @Query("DELETE FROM QuizScoreEntity")
+    suspend fun deleteAllScores()
 
     @Query("SELECT * FROM QuizScoreEntity ORDER BY score DESC")
     fun getAllScores() : Flow<List<QuizScoreEntity>>

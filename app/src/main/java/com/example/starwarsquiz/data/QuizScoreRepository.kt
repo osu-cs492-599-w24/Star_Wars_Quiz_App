@@ -9,5 +9,5 @@ class QuizScoreRepository(
 
     fun getAllScores() = dao.getAllScores()
 
-    suspend fun deleteAllExceptHighScore() = dao.deleteAllExceptHighestScore()
+    suspend fun deleteAllScores() = dao.deleteAllScores()
 }
