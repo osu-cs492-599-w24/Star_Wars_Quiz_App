@@ -101,14 +101,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                app:cardBackgroundColor="@color/sw_yellow"
                 android:gravity="start">
 
                 <TextView
                     android:id="@+id/tv_mc_answer1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/view_border"
                     android:paddingHorizontal="30dp"
                     android:paddingVertical="32dp"
                     android:textAppearance="?attr/textAppearanceHeadline5" />
@@ -126,7 +124,6 @@
                     android:id="@+id/tv_mc_answer2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/view_border"
                     android:paddingHorizontal="30dp"
                     android:paddingVertical="32dp"
                     android:textAppearance="?attr/textAppearanceHeadline5" />
@@ -144,7 +141,6 @@
                     android:id="@+id/tv_mc_answer3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/view_border"
                     android:paddingHorizontal="30dp"
                     android:paddingVertical="32dp"
                     android:textAppearance="?attr/textAppearanceHeadline5" />
@@ -162,7 +158,6 @@
                     android:id="@+id/tv_mc_answer4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/view_border"
                     android:paddingHorizontal="30dp"
                     android:paddingVertical="32dp"
                     android:textAppearance="?attr/textAppearanceHeadline5" />
