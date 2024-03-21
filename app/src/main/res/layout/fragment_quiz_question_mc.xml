@@ -1,201 +1,226 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:layout_margin="20dp">
+    android:layout_height="wrap_content" >
 
-    <!-- Header Layout -->
-    <LinearLayout
-        android:id="@+id/header_layout"
+    <RelativeLayout
+        android:id="@+id/question_mc_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:layout_alignParentTop="true">
-
-        <!-- Left LinearLayout -->
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="horizontal"
-            android:gravity="start"
-            android:layout_gravity="center">
-
-            <TextView
-                android:id="@+id/tv_quiz_question_num"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="50sp"
-                android:textStyle="bold"
-                android:textAppearance="?attr/textAppearanceHeadline5" />
-
-            <TextView
-                android:id="@+id/tv_quiz_num_questions"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?attr/textAppearanceHeadline5"
-                android:text="@string/quiz_num_questions"/>
-
-        </LinearLayout>
-
-        <!-- Right LinearLayout -->
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="horizontal"
-            android:gravity="end"
-            android:layout_gravity="bottom"
-            android:layout_marginBottom="8dp">
-
-            <TextView
-                android:id="@+id/tv_quiz_score_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingEnd="5dp"
-                android:textAppearance="?attr/textAppearanceHeadline5"
-                android:text="@string/quiz_score_label"/>
-
-            <TextView
-                android:id="@+id/tv_quiz_current_score"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?attr/textAppearanceHeadline5"
-                android:textStyle="bold"/>
-
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <!-- Body Layout -->
-    <LinearLayout
-        android:id="@+id/body_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:orientation="vertical"
-        android:layout_below="@id/header_layout"
-        android:layout_above="@id/footer_layout"
-        android:gravity="center_horizontal">
+        android:layout_margin="20dp">
 
-        <TextView
-            android:id="@+id/tv_quiz_question"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?attr/textAppearanceHeadline5"
-            android:text="@string/question_1"
-            android:layout_marginVertical="40dp"
-            android:textStyle="italic"
-            android:layout_gravity="center_horizontal"
-            android:gravity="center_horizontal"/>
 
-        <!-- Vertical linear layout for the answer options -->
+        <!-- Header Layout -->
         <LinearLayout
+            android:id="@+id/header_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:orientation="vertical">
+            android:gravity="center_horizontal"
+            android:layout_alignParentTop="true">
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/mc_mc_answer1"
-                android:layout_width="match_parent"
+            <!-- Left LinearLayout -->
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:gravity="start">
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:gravity="start"
+                android:layout_gravity="center">
 
                 <TextView
-                    android:id="@+id/tv_mc_answer1"
-                    android:layout_width="match_parent"
+                    android:id="@+id/tv_quiz_question_num"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingHorizontal="30dp"
-                    android:paddingVertical="32dp"
+                    android:textSize="50sp"
+                    android:textStyle="bold"
                     android:textAppearance="?attr/textAppearanceHeadline5" />
-
-            </com.google.android.material.card.MaterialCardView>
-
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/mc_mc_answer2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:gravity="end">
 
                 <TextView
-                    android:id="@+id/tv_mc_answer2"
-                    android:layout_width="match_parent"
+                    android:id="@+id/tv_quiz_num_questions"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingHorizontal="30dp"
-                    android:paddingVertical="32dp"
-                    android:textAppearance="?attr/textAppearanceHeadline5" />
+                    android:textAppearance="?attr/textAppearanceHeadline5"
+                    android:text="@string/quiz_num_questions"/>
 
-            </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/mc_mc_answer3"
-                android:layout_width="match_parent"
+            <!-- Right LinearLayout -->
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:gravity="start">
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:gravity="end"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="8dp">
 
                 <TextView
-                    android:id="@+id/tv_mc_answer3"
-                    android:layout_width="match_parent"
+                    android:id="@+id/tv_quiz_score_label"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingHorizontal="30dp"
-                    android:paddingVertical="32dp"
-                    android:textAppearance="?attr/textAppearanceHeadline5" />
-
-            </com.google.android.material.card.MaterialCardView>
-
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/mc_mc_answer4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:gravity="end">
+                    android:paddingEnd="5dp"
+                    android:textAppearance="?attr/textAppearanceHeadline5"
+                    android:text="@string/quiz_score_label"/>
 
                 <TextView
-                    android:id="@+id/tv_mc_answer4"
-                    android:layout_width="match_parent"
+                    android:id="@+id/tv_quiz_current_score"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingHorizontal="30dp"
-                    android:paddingVertical="32dp"
-                    android:textAppearance="?attr/textAppearanceHeadline5" />
+                    android:textAppearance="?attr/textAppearanceHeadline5"
+                    android:textStyle="bold"/>
 
-            </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
 
         </LinearLayout>
 
-    </LinearLayout>
+        <!-- Body Layout -->
+        <LinearLayout
+            android:id="@+id/body_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_below="@id/header_layout"
+            android:layout_above="@id/footer_layout"
+            android:gravity="center_horizontal">
 
-    <!-- Button Layout -->
-    <FrameLayout
-        android:id="@+id/footer_layout"
-        android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/tv_quiz_question"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?attr/textAppearanceHeadline5"
+                android:text="@string/question_1"
+                android:layout_marginVertical="40dp"
+                android:textStyle="italic"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal"/>
+
+            <!-- Vertical linear layout for the answer options -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="vertical">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/mc_mc_answer1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:gravity="start">
+
+                    <TextView
+                        android:id="@+id/tv_mc_answer1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingHorizontal="30dp"
+                        android:paddingVertical="32dp"
+                        android:textAppearance="?attr/textAppearanceHeadline5" />
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/mc_mc_answer2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:gravity="end">
+
+                    <TextView
+                        android:id="@+id/tv_mc_answer2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingHorizontal="30dp"
+                        android:paddingVertical="32dp"
+                        android:textAppearance="?attr/textAppearanceHeadline5" />
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/mc_mc_answer3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:gravity="start">
+
+                    <TextView
+                        android:id="@+id/tv_mc_answer3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingHorizontal="30dp"
+                        android:paddingVertical="32dp"
+                        android:textAppearance="?attr/textAppearanceHeadline5" />
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/mc_mc_answer4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:gravity="end">
+
+                    <TextView
+                        android:id="@+id/tv_mc_answer4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingHorizontal="30dp"
+                        android:paddingVertical="32dp"
+                        android:textAppearance="?attr/textAppearanceHeadline5" />
+
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+            <!-- Button Layout -->
+            <FrameLayout
+                android:id="@+id/footer_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true">
+
+                <Button
+                    android:id="@+id/button_next"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|end"
+                    android:text="@string/next"
+                    android:textSize="20sp"
+                    android:paddingVertical="15dp"
+                    android:paddingHorizontal="50dp"
+                    android:visibility="invisible"/>
+
+                <Button
+                    android:id="@+id/button_submit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|end"
+                    android:text="@string/submit"
+                    android:textSize="20sp"
+                    android:paddingVertical="15dp"
+                    android:paddingHorizontal="50dp" />
+
+            </FrameLayout>
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_loading_error"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true">
+        android:padding="16dp"
+        android:textAppearance="?attr/textAppearanceBody1"
+        android:textColor="?attr/colorError"
+        android:visibility="invisible" />
 
-        <Button
-            android:id="@+id/button_next"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|end"
-            android:text="@string/next"
-            android:textSize="20sp"
-            android:paddingVertical="15dp"
-            android:paddingHorizontal="50dp"
-            android:visibility="invisible"/>
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:id="@+id/loading_indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:layout_gravity="center"
+        android:visibility="invisible" />
 
-        <Button
-            android:id="@+id/button_submit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|end"
-            android:text="@string/submit"
-            android:textSize="20sp"
-            android:paddingVertical="15dp"
-            android:paddingHorizontal="50dp" />
-
-    </FrameLayout>
-
-</RelativeLayout>
+</FrameLayout>

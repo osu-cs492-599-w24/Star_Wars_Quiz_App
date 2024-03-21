@@ -1,12 +1,17 @@
 <resources>
     <string name="app_name">Star Wars\nQuiz</string>
 
+    <string name="loading_error">Unable to fetch API data. Error message: %1$s</string>
+
     <string name="start">Start Quiz</string>
-    <string name="previous">previous</string>
-    <string name="next">next</string>
-    <string name="submit">submit</string>
-    <string name="home">home</string>
-    <string name="restart">restart</string>
+    <string name="previous">Previous</string>
+    <string name="next">Next</string>
+    <string name="submit">Submit</string>
+    <string name="home">Home</string>
+    <string name="restart">Restart</string>
+    <string name="history">History</string>
+    <string name="clear_history">Clear History</string>
+
 
     <string name="quiz_num_questions">/10</string>
     <string name="quiz_score_label">Score: </string>

@@ -16,6 +16,7 @@ import com.example.starwarsquiz.data.QuestionContents
 import com.example.starwarsquiz.data.SWAPICharacter
 import com.example.starwarsquiz.data.SWAPIPlanet
 import com.google.android.material.card.MaterialCardView
+import com.google.android.material.progressindicator.CircularProgressIndicator
 import kotlin.random.Random
 
 class QuizQuestionMCFragment : Fragment(R.layout.fragment_quiz_question_mc){
@@ -45,6 +46,10 @@ class QuizQuestionMCFragment : Fragment(R.layout.fragment_quiz_question_mc){
     private lateinit var mcChoice4: MaterialCardView
     private lateinit var tvChoice4: TextView
 
+    private lateinit var loadingIndicator: CircularProgressIndicator
+    private lateinit var MCPageView: View
+    private lateinit var loadingErrorTV: TextView
+
     private var characterList: List<SWAPICharacter>? = null
     private var characterDetails: CharacterDetails? = null
     private var planetDetails: PlanetDetails? = null
@@ -53,7 +58,6 @@ class QuizQuestionMCFragment : Fragment(R.layout.fragment_quiz_question_mc){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        characterListViewModel.loadSWAPICharacters(1, listSize.last)
 
         planetsViewModel.loadSWAPIPlanets(1, 40)
         var planet = listOf<SWAPIPlanet>()
@@ -77,6 +81,9 @@ class QuizQuestionMCFragment : Fragment(R.layout.fragment_quiz_question_mc){
         tvChoice3 = view.findViewById(R.id.tv_mc_answer3)
         mcChoice4 = view.findViewById(R.id.mc_mc_answer4)
         tvChoice4 = view.findViewById(R.id.tv_mc_answer4)
+
+        loadingIndicator = view.findViewById(R.id.loading_indicator)
+        MCPageView = view.findViewById(R.id.question_mc_layout)
 
         /*
             perform logic below
@@ -112,25 +119,31 @@ class QuizQuestionMCFragment : Fragment(R.layout.fragment_quiz_question_mc){
         tvChoice3.text = args.questionContents.answerChoices?.get(2) ?: "NO VALUE"
         tvChoice4.text = args.questionContents.answerChoices?.get(3) ?: "NO VALUE"
 
-//        characterListViewModel.characterResults.observe(viewLifecycleOwner) { CharacterList ->
-//            if (CharacterList != null) {
-//                characterList = CharacterList
-//            } else {
-//                Log.d("MCFragment", "character list is null")
-//            }
-//        }
 
         // Wait for both character and planet details to be loaded before starting the quiz
-        val oldNextVisibility = nextButton.visibility
-        val oldSubmitVisibility = submitButton.visibility
-        nextButton.visibility = View.INVISIBLE
-        submitButton.visibility = View.INVISIBLE
         characterDetailsViewModel.loading.observe(viewLifecycleOwner) { loading ->
-            if (!loading) {
+            if (loading) {
                 planetDetailsViewModel.loading.observe(viewLifecycleOwner) { loading ->
-                    if (!loading) {
-                        nextButton.visibility = oldNextVisibility
-                        submitButton.visibility = oldSubmitVisibility
+                    if (loading) {
+                        loadingIndicator.visibility = View.VISIBLE
+                        MCPageView.visibility = View.INVISIBLE
+                    } else {
+                        loadingIndicator.visibility = View.INVISIBLE
+                        MCPageView.visibility = View.VISIBLE
+                    }
+                }
+            }
+        }
+
+        characterDetailsViewModel.error.observe(viewLifecycleOwner) { error ->
+            if (error != null) {
+                planetDetailsViewModel.error.observe(viewLifecycleOwner) { error ->
+                    if (error != null) {
+                        loadingErrorTV.text = getString(R.string.loading_error, error.message)
+                        loadingErrorTV.visibility = View.VISIBLE
+                        MCPageView.visibility = View.INVISIBLE
+                        Log.e("LandingPageFragment",
+                            "Error fetching from API: ${error.message}")
                     }
                 }
             }
