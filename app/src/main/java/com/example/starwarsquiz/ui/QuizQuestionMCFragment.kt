@@ -399,7 +399,7 @@ class QuizQuestionMCFragment : Fragment(R.layout.fragment_quiz_question_mc){
                             args.questionContents.quizNumber + 1,
                             nextScore,
                             "Hello there",
-                            people[10-2].name,
+                            people[10-1].name,
                             listOf(people[79-2].name, people[11-1].name, people[1-1].name, people[10-1].name)
 
                         )
