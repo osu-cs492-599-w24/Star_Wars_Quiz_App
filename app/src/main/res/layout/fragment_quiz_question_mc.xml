@@ -1,202 +1,218 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:layout_margin="20dp">
+    android:layout_height="wrap_content" >
 
-    <!-- Header Layout -->
-    <LinearLayout
-        android:id="@+id/header_layout"
+    <RelativeLayout
+        android:id="@+id/question_mc_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:layout_alignParentTop="true">
-
-        <!-- Left LinearLayout -->
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="horizontal"
-            android:gravity="start">
-
-            <TextView
-                android:id="@+id/tv_quiz_question_num"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?attr/textAppearanceHeadline5" />
-
-            <TextView
-                android:id="@+id/tv_quiz_num_questions"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?attr/textAppearanceHeadline5"
-                android:text="@string/quiz_num_questions"/>
-
-        </LinearLayout>
-
-        <!-- Right LinearLayout -->
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="horizontal"
-            android:gravity="end">
-
-            <TextView
-                android:id="@+id/tv_quiz_score_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?attr/textAppearanceHeadline5"
-                android:text="@string/quiz_score_label"/>
-
-            <TextView
-                android:id="@+id/tv_quiz_current_score"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?attr/textAppearanceHeadline5" />
-
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <!-- Body Layout -->
-    <LinearLayout
-        android:id="@+id/body_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:orientation="vertical"
-        android:layout_below="@id/header_layout"
-        android:layout_above="@id/footer_layout"
-        android:gravity="center_horizontal">
+        android:layout_margin="20dp">
 
-        <TextView
-            android:id="@+id/tv_quiz_question"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?attr/textAppearanceHeadline5"
-            android:text="@string/question_1"
-            android:layout_marginVertical="40dp"/>
 
-        <!-- Horizontal linear layout for the answer options -->
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:orientation="horizontal">
-
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/mc_mc_answer1"
-                android:layout_width="wrap_content"
+            <!-- Header Layout -->
+            <LinearLayout
+                android:id="@+id/header_layout"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="20dp"
-                app:cardBackgroundColor="@color/sw_yellow">
+                android:gravity="center_horizontal"
+                android:layout_alignParentTop="true">
+
+                <!-- Left LinearLayout -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:gravity="start">
+
+                    <TextView
+                        android:id="@+id/tv_quiz_question_num"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?attr/textAppearanceHeadline5" />
+
+                    <TextView
+                        android:id="@+id/tv_quiz_num_questions"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?attr/textAppearanceHeadline5"
+                        android:text="@string/quiz_num_questions"/>
+
+                </LinearLayout>
+
+                <!-- Right LinearLayout -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:gravity="end">
+
+                    <TextView
+                        android:id="@+id/tv_quiz_score_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?attr/textAppearanceHeadline5"
+                        android:text="@string/quiz_score_label"/>
+
+                    <TextView
+                        android:id="@+id/tv_quiz_current_score"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?attr/textAppearanceHeadline5" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- Body Layout -->
+            <LinearLayout
+                android:id="@+id/body_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_below="@id/header_layout"
+                android:layout_above="@id/footer_layout"
+                android:gravity="center_horizontal">
 
                 <TextView
-                    android:id="@+id/tv_mc_answer1"
+                    android:id="@+id/tv_quiz_question"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/view_border"
-                    android:paddingHorizontal="16dp"
-                    android:paddingVertical="32dp"
-                    android:text="Unset!"
-                    android:textAppearance="?attr/textAppearanceHeadline5" />
+                    android:textAppearance="?attr/textAppearanceHeadline5"
+                    android:text="@string/question_1"
+                    android:layout_marginVertical="40dp"/>
 
-            </com.google.android.material.card.MaterialCardView>
+                <!-- Horizontal linear layout for the answer options -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal">
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/mc_mc_answer2"
-                android:layout_width="wrap_content"
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/mc_mc_answer1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="20dp"
+                        app:cardBackgroundColor="@color/sw_yellow">
+
+                        <TextView
+                            android:id="@+id/tv_mc_answer1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/view_border"
+                            android:paddingHorizontal="16dp"
+                            android:paddingVertical="32dp"
+                            android:text="Unset!"
+                            android:textAppearance="?attr/textAppearanceHeadline5" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/mc_mc_answer2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="20dp">
+
+                        <TextView
+                            android:id="@+id/tv_mc_answer2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/view_border"
+                            android:paddingHorizontal="16dp"
+                            android:paddingVertical="32dp"
+                            android:text="Unset!"
+                            android:textAppearance="?attr/textAppearanceHeadline5" />
+
+                    </com.google.android.material.card.MaterialCardView>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/mc_mc_answer3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="20dp"
+                        >
+
+                        <TextView
+                            android:id="@+id/tv_mc_answer3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/view_border"
+                            android:paddingHorizontal="16dp"
+                            android:paddingVertical="32dp"
+                            android:text="Unset!"
+                            android:textAppearance="?attr/textAppearanceHeadline5" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/mc_mc_answer4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="20dp">
+
+                        <TextView
+                            android:id="@+id/tv_mc_answer4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/view_border"
+                            android:paddingHorizontal="16dp"
+                            android:paddingVertical="32dp"
+                            android:text="Unset!"
+                            android:textAppearance="?attr/textAppearanceHeadline5" />
+
+                    </com.google.android.material.card.MaterialCardView>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- Button Layout -->
+            <FrameLayout
+                android:id="@+id/footer_layout"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="20dp">
+                android:layout_alignParentBottom="true">
 
-                <TextView
-                    android:id="@+id/tv_mc_answer2"
+                <Button
+                    android:id="@+id/button_next"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/view_border"
-                    android:paddingHorizontal="16dp"
-                    android:paddingVertical="32dp"
-                    android:text="Unset!"
-                    android:textAppearance="?attr/textAppearanceHeadline5" />
+                    android:layout_gravity="center_vertical|end"
+                    android:text="@string/next"
+                    android:textSize="20sp"
+                    android:paddingVertical="15dp"
+                    android:paddingHorizontal="50dp"
+                    android:visibility="invisible"/>
 
-            </com.google.android.material.card.MaterialCardView>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/mc_mc_answer3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="20dp"
-                >
-
-                <TextView
-                    android:id="@+id/tv_mc_answer3"
+                <Button
+                    android:id="@+id/button_submit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/view_border"
-                    android:paddingHorizontal="16dp"
-                    android:paddingVertical="32dp"
-                    android:text="Unset!"
-                    android:textAppearance="?attr/textAppearanceHeadline5" />
+                    android:layout_gravity="center_vertical|end"
+                    android:text="@string/submit"
+                    android:textSize="20sp"
+                    android:paddingVertical="15dp"
+                    android:paddingHorizontal="50dp" />
 
-            </com.google.android.material.card.MaterialCardView>
+            </FrameLayout>
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/mc_mc_answer4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="20dp">
+    </RelativeLayout>
 
-                <TextView
-                    android:id="@+id/tv_mc_answer4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/view_border"
-                    android:paddingHorizontal="16dp"
-                    android:paddingVertical="32dp"
-                    android:text="Unset!"
-                    android:textAppearance="?attr/textAppearanceHeadline5" />
-
-            </com.google.android.material.card.MaterialCardView>
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <!-- Button Layout -->
-    <FrameLayout
-        android:id="@+id/footer_layout"
-        android:layout_width="match_parent"
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:id="@+id/loading_indicator"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true">
+        android:indeterminate="true"
+        android:layout_gravity="center"
+        android:visibility="invisible" />
 
-        <Button
-            android:id="@+id/button_next"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|end"
-            android:text="@string/next"
-            android:textSize="20sp"
-            android:paddingVertical="15dp"
-            android:paddingHorizontal="50dp"
-            android:visibility="invisible"/>
-
-        <Button
-            android:id="@+id/button_submit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|end"
-            android:text="@string/submit"
-            android:textSize="20sp"
-            android:paddingVertical="15dp"
-            android:paddingHorizontal="50dp" />
-
-    </FrameLayout>
-
-</RelativeLayout>
+</FrameLayout>

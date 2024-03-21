@@ -1,5 +1,6 @@
 package com.example.starwarsquiz.ui
 
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -15,6 +16,7 @@ import com.example.starwarsquiz.data.QuestionContents
 import com.example.starwarsquiz.data.SWAPICharacter
 import kotlin.random.Random
 import com.example.starwarsquiz.data.SWAPIPlanet
+import com.google.android.material.progressindicator.CircularProgressIndicator
 
 class LandingPageFragment : Fragment(R.layout.fragment_landing_page){
 
@@ -32,12 +34,16 @@ class LandingPageFragment : Fragment(R.layout.fragment_landing_page){
     private var planetDetails: PlanetDetails? = null
     private var listSize = 1..50
     private val randomNumber = generateRandomNumber(listSize, 17)
+    private lateinit var loadingIndicator: CircularProgressIndicator
+    private lateinit var landingPageView: View
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        landingPageView = view.findViewById(R.id.landing_page_layout)
         startButton = view.findViewById(R.id.start_button)
         historyButton = view.findViewById(R.id.button_score_history)
+        loadingIndicator = view.findViewById(R.id.loading_indicator)
 
 //        characterListViewModel.characterResults.observe(viewLifecycleOwner) { CharacterList ->
 //            if (CharacterList != null) {
@@ -48,20 +54,26 @@ class LandingPageFragment : Fragment(R.layout.fragment_landing_page){
 //        }
 
         // Wait for both character and planet details to be loaded before starting the quiz
-        startButton.visibility = View.INVISIBLE
+       // startButton.visibility = View.VISIBLE
         characterDetailsViewModel.loading.observe(viewLifecycleOwner) { loading ->
-            if (!loading) {
+            if (loading) {
                 planetDetailsViewModel.loading.observe(viewLifecycleOwner) { loading ->
-                    if (!loading) {
-                        startButton.visibility = View.VISIBLE
+                    if (loading) {
+                        loadingIndicator.visibility = View.VISIBLE
+                        landingPageView.visibility = View.INVISIBLE
+                    } else {
+                        loadingIndicator.visibility = View.INVISIBLE
+                        landingPageView.visibility = View.VISIBLE
                     }
                 }
             }
         }
 
+
         characterDetailsViewModel.characterDetails.observe(viewLifecycleOwner) { character ->
             if (character != null) {
                 characterDetails = character
+//                landingPageView.visibility = View.VISIBLE
             } else {
                 Log.d("MCFragment", "character details is null")
             }

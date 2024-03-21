@@ -16,6 +16,7 @@ import com.example.starwarsquiz.data.QuestionContents
 import com.example.starwarsquiz.data.SWAPICharacter
 import com.example.starwarsquiz.data.SWAPIPlanet
 import com.google.android.material.card.MaterialCardView
+import com.google.android.material.progressindicator.CircularProgressIndicator
 import kotlin.random.Random
 
 class QuizQuestionMCFragment : Fragment(R.layout.fragment_quiz_question_mc){
@@ -44,6 +45,9 @@ class QuizQuestionMCFragment : Fragment(R.layout.fragment_quiz_question_mc){
     private lateinit var tvChoice3: TextView
     private lateinit var mcChoice4: MaterialCardView
     private lateinit var tvChoice4: TextView
+
+    private lateinit var loadingIndicator: CircularProgressIndicator
+    private lateinit var MCPageView: View
 
     private var characterList: List<SWAPICharacter>? = null
     private var characterDetails: CharacterDetails? = null
@@ -77,6 +81,9 @@ class QuizQuestionMCFragment : Fragment(R.layout.fragment_quiz_question_mc){
         tvChoice3 = view.findViewById(R.id.tv_mc_answer3)
         mcChoice4 = view.findViewById(R.id.mc_mc_answer4)
         tvChoice4 = view.findViewById(R.id.tv_mc_answer4)
+
+        loadingIndicator = view.findViewById(R.id.loading_indicator)
+        MCPageView = view.findViewById(R.id.question_mc_layout)
 
         /*
             perform logic below
@@ -121,16 +128,21 @@ class QuizQuestionMCFragment : Fragment(R.layout.fragment_quiz_question_mc){
 //        }
 
         // Wait for both character and planet details to be loaded before starting the quiz
-        val oldNextVisibility = nextButton.visibility
-        val oldSubmitVisibility = submitButton.visibility
-        nextButton.visibility = View.INVISIBLE
-        submitButton.visibility = View.INVISIBLE
+//        val oldNextVisibility = nextButton.visibility
+//        val oldSubmitVisibility = submitButton.visibility
+//        nextButton.visibility = View.INVISIBLE
+//        submitButton.visibility = View.INVISIBLE
         characterDetailsViewModel.loading.observe(viewLifecycleOwner) { loading ->
-            if (!loading) {
+            if (loading) {
                 planetDetailsViewModel.loading.observe(viewLifecycleOwner) { loading ->
-                    if (!loading) {
-                        nextButton.visibility = oldNextVisibility
-                        submitButton.visibility = oldSubmitVisibility
+                    if (loading) {
+                        loadingIndicator.visibility = View.VISIBLE
+                        MCPageView.visibility = View.INVISIBLE
+//                        nextButton.visibility = oldNextVisibility
+//                        submitButton.visibility = oldSubmitVisibility
+                    } else {
+                        loadingIndicator.visibility = View.INVISIBLE
+                        MCPageView.visibility = View.VISIBLE
                     }
                 }
             }
