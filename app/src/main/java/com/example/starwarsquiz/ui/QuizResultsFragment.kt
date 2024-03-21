@@ -33,7 +33,6 @@ class QuizResultsFragment : Fragment(R.layout.fragment_quiz_results) {
     private lateinit var highestScoreTV: TextView
     private lateinit var homeButton: Button
     private lateinit var restartButton: Button
-    private lateinit var historyButton: Button
     private lateinit var shareButton: ImageButton
     private lateinit var rewardVV: VideoView
 
@@ -49,7 +48,6 @@ class QuizResultsFragment : Fragment(R.layout.fragment_quiz_results) {
         highestScoreTV = view.findViewById(R.id.tv_highest_score)
         homeButton = view.findViewById(R.id.button_home)
         restartButton = view.findViewById(R.id.button_restart_quiz)
-        historyButton = view.findViewById(R.id.button_score_history)
         shareButton = view.findViewById(R.id.button_share_score)
         rewardVV = view.findViewById(R.id.vv_reward_video)
 
@@ -102,11 +100,6 @@ class QuizResultsFragment : Fragment(R.layout.fragment_quiz_results) {
         // Home button goes to landing page
         homeButton.setOnClickListener {
             val action = QuizResultsFragmentDirections.navigateToLandingPage()
-            findNavController().navigate(action)
-        }
-
-        historyButton.setOnClickListener {
-            val action = QuizResultsFragmentDirections.navigateToScoreHistory()
             findNavController().navigate(action)
         }
 
