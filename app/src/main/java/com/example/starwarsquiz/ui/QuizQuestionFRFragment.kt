@@ -142,7 +142,7 @@ class QuizQuestionFRFragment : Fragment(R.layout.fragment_quiz_question_fr) {
                     }
                 }
 
-                //58-1 or -2 bc of people/17?
+                //-2 for people after 17
 
                 val nextQ : Int = args.questionContents.quizNumber + 1
 
@@ -152,7 +152,7 @@ class QuizQuestionFRFragment : Fragment(R.layout.fragment_quiz_question_fr) {
                     1 -> {
 
                         newArgs = QuestionContents(
-                            args.questionContents.quizNumber,
+                            args.questionContents.quizNumber + 1,
                             nextScore,
                             "What planet is Darth Maul from?",
                             planet[36-1].name,
@@ -166,7 +166,7 @@ class QuizQuestionFRFragment : Fragment(R.layout.fragment_quiz_question_fr) {
                     2 -> {
 
                         newArgs = QuestionContents(
-                            args.questionContents.quizNumber,
+                            args.questionContents.quizNumber + 1,
                             nextScore,
                             "Who was Starkiller's master?",
                             people[4-1].name,
@@ -181,11 +181,11 @@ class QuizQuestionFRFragment : Fragment(R.layout.fragment_quiz_question_fr) {
                     3 -> {
 
                         newArgs = QuestionContents(
-                            args.questionContents.quizNumber,
+                            args.questionContents.quizNumber + 1,
                             nextScore,
                             "Who was the jedi that discovered Ahsoka?",
                             people[58-1].name,
-                            listOf(people[11-1].name, people[53-1].name, people[10-1].name, people[58-1].name)
+                            listOf(people[11-1].name, people[53-2].name, people[10-1].name, people[58-2].name)
 
                         )
 
@@ -196,11 +196,11 @@ class QuizQuestionFRFragment : Fragment(R.layout.fragment_quiz_question_fr) {
                     4 -> {
 
                         newArgs = QuestionContents(
-                            args.questionContents.quizNumber,
+                            args.questionContents.quizNumber + 1,
                             nextScore,
                             "Whose DNA was used to create the clone troopers?",
                             people[69-1].name,
-                            listOf(people[69-1].name, people[72-1].name, people[22-1].name, people[67-1].name)
+                            listOf(people[69-2].name, people[72-2].name, people[22-2].name, people[67-2].name)
 
                         )
 
@@ -211,11 +211,11 @@ class QuizQuestionFRFragment : Fragment(R.layout.fragment_quiz_question_fr) {
                     5 -> {
 
                         newArgs = QuestionContents(
-                            args.questionContents.quizNumber,
+                            args.questionContents.quizNumber + 1,
                             nextScore,
                             "Who was the only unaltered clone?",
                             people[22-1].name,
-                            listOf(people[69-1].name, people[72-1].name, people[22-1].name, people[67-1].name)
+                            listOf(people[69-2].name, people[72-2].name, people[22-2].name, people[67-2].name)
 
                         )
 
@@ -226,11 +226,11 @@ class QuizQuestionFRFragment : Fragment(R.layout.fragment_quiz_question_fr) {
                     6 -> {
 
                         newArgs = QuestionContents(
-                            args.questionContents.quizNumber,
+                            args.questionContents.quizNumber + 1,
                             nextScore,
                             "Who was Qui Gon Jinn's master?",
                             people[67-1].name,
-                            listOf(people[1-1].name, people[20-1].name, people[67-1].name, people[10-1].name)
+                            listOf(people[1-1].name, people[20-2].name, people[67-2].name, people[10-1].name)
 
                         )
 
@@ -241,7 +241,7 @@ class QuizQuestionFRFragment : Fragment(R.layout.fragment_quiz_question_fr) {
                     7 -> {
 
                         newArgs = QuestionContents(
-                            args.questionContents.quizNumber,
+                            args.questionContents.quizNumber + 1,
                             nextScore,
                             "What planet was Palpatine from?",
                             planet[8-1].name,
@@ -256,7 +256,7 @@ class QuizQuestionFRFragment : Fragment(R.layout.fragment_quiz_question_fr) {
                     8 -> {
 
                         newArgs = QuestionContents(
-                            args.questionContents.quizNumber,
+                            args.questionContents.quizNumber + 1,
                             nextScore,
                             "What planet was Starkiller from?",
                             planet[14-1].name,
@@ -271,11 +271,11 @@ class QuizQuestionFRFragment : Fragment(R.layout.fragment_quiz_question_fr) {
                     9 -> {
 
                         newArgs = QuestionContents(
-                            args.questionContents.quizNumber,
+                            args.questionContents.quizNumber + 1,
                             nextScore,
                             "Who inquired about the droid attack on the wookies?",
                             people[52-1].name,
-                            listOf(people[52-1].name, people[57-1].name, people[58-1].name, people[51-1].name)
+                            listOf(people[52-2].name, people[57-2].name, people[58-2].name, people[51-2].name)
 
                         )
 
@@ -286,11 +286,11 @@ class QuizQuestionFRFragment : Fragment(R.layout.fragment_quiz_question_fr) {
                     10 -> {
 
                         newArgs = QuestionContents(
-                            args.questionContents.quizNumber,
+                            args.questionContents.quizNumber + 1,
                             nextScore,
                             "Hello there",
                             people[10-1].name,
-                            listOf(people[79-1].name, people[11-1].name, people[1-1].name, people[10-1].name)
+                            listOf(people[79-2].name, people[11-1].name, people[1-1].name, people[10-1].name)
 
                         )
 
@@ -320,3 +320,4 @@ class QuizQuestionFRFragment : Fragment(R.layout.fragment_quiz_question_fr) {
         }
     }
 }
+
