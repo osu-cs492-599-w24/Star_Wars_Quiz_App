@@ -284,7 +284,7 @@ class QuizQuestionMCFragment : Fragment(R.layout.fragment_quiz_question_mc){
 
                         )
 
-                        val action = QuizQuestionMCFragmentDirections.navigateToQuizQuestionFr(newArgs)
+                        val action = QuizQuestionMCFragmentDirections.navigateToQuizQuestionMc(newArgs)
                         findNavController().navigate(action)
 
                     }
@@ -299,7 +299,7 @@ class QuizQuestionMCFragment : Fragment(R.layout.fragment_quiz_question_mc){
 
                         )
 
-                        val action = QuizQuestionMCFragmentDirections.navigateToQuizQuestionFr(newArgs)
+                        val action = QuizQuestionMCFragmentDirections.navigateToQuizQuestionMc(newArgs)
                         findNavController().navigate(action)
 
                     }
@@ -314,7 +314,7 @@ class QuizQuestionMCFragment : Fragment(R.layout.fragment_quiz_question_mc){
 
                         )
 
-                        val action = QuizQuestionMCFragmentDirections.navigateToQuizQuestionFr(newArgs)
+                        val action = QuizQuestionMCFragmentDirections.navigateToQuizQuestionMc(newArgs)
                         findNavController().navigate(action)
 
                     }
@@ -329,7 +329,7 @@ class QuizQuestionMCFragment : Fragment(R.layout.fragment_quiz_question_mc){
 
                         )
 
-                        val action = QuizQuestionMCFragmentDirections.navigateToQuizQuestionFr(newArgs)
+                        val action = QuizQuestionMCFragmentDirections.navigateToQuizQuestionMc(newArgs)
                         findNavController().navigate(action)
 
                     }
@@ -344,7 +344,7 @@ class QuizQuestionMCFragment : Fragment(R.layout.fragment_quiz_question_mc){
 
                         )
 
-                        val action = QuizQuestionMCFragmentDirections.navigateToQuizQuestionFr(newArgs)
+                        val action = QuizQuestionMCFragmentDirections.navigateToQuizQuestionMc(newArgs)
                         findNavController().navigate(action)
 
                     }
@@ -359,7 +359,7 @@ class QuizQuestionMCFragment : Fragment(R.layout.fragment_quiz_question_mc){
 
                         )
 
-                        val action = QuizQuestionMCFragmentDirections.navigateToQuizQuestionFr(newArgs)
+                        val action = QuizQuestionMCFragmentDirections.navigateToQuizQuestionMc(newArgs)
                         findNavController().navigate(action)
 
                     }
@@ -374,7 +374,7 @@ class QuizQuestionMCFragment : Fragment(R.layout.fragment_quiz_question_mc){
 
                         )
 
-                        val action = QuizQuestionMCFragmentDirections.navigateToQuizQuestionFr(newArgs)
+                        val action = QuizQuestionMCFragmentDirections.navigateToQuizQuestionMc(newArgs)
                         findNavController().navigate(action)
 
                     }
@@ -389,7 +389,7 @@ class QuizQuestionMCFragment : Fragment(R.layout.fragment_quiz_question_mc){
 
                         )
 
-                        val action = QuizQuestionMCFragmentDirections.navigateToQuizQuestionFr(newArgs)
+                        val action = QuizQuestionMCFragmentDirections.navigateToQuizQuestionMc(newArgs)
                         findNavController().navigate(action)
 
                     }
@@ -404,7 +404,7 @@ class QuizQuestionMCFragment : Fragment(R.layout.fragment_quiz_question_mc){
 
                         )
 
-                        val action = QuizQuestionMCFragmentDirections.navigateToQuizQuestionFr(newArgs)
+                        val action = QuizQuestionMCFragmentDirections.navigateToQuizQuestionMc(newArgs)
                         findNavController().navigate(action)
 
                     }
