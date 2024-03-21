@@ -26,11 +26,9 @@ class LandingPageFragment : Fragment(R.layout.fragment_landing_page){
     private lateinit var startButton: Button
     private lateinit var historyButton: Button
 
-    private val characterListViewModel: SWAPICharacterViewModel by viewModels()
     private val characterDetailsViewModel: SWAPICharacterDetailsViewModel by viewModels()
     private val planetDetailsViewModel: SWAPIPlanetDetailsViewModel by viewModels()
 
-    private var characterList: List<SWAPICharacter>? = null
     private var characterDetails: CharacterDetails? = null
     private var planetDetails: PlanetDetails? = null
     private var listSize = 1..50
@@ -49,16 +47,7 @@ class LandingPageFragment : Fragment(R.layout.fragment_landing_page){
         loadingIndicator = view.findViewById(R.id.loading_indicator)
         loadingErrorTV = view.findViewById(R.id.tv_loading_error)
 
-//        characterListViewModel.characterResults.observe(viewLifecycleOwner) { CharacterList ->
-//            if (CharacterList != null) {
-//                characterList = CharacterList
-//            } else {
-//                Log.d("MCFragment", "character list is null")
-//            }
-//        }
-
         // Wait for both character and planet details to be loaded before starting the quiz
-       // startButton.visibility = View.VISIBLE
         characterDetailsViewModel.loading.observe(viewLifecycleOwner) { loading ->
             if (loading) {
                 planetDetailsViewModel.loading.observe(viewLifecycleOwner) { loading ->
@@ -90,7 +79,6 @@ class LandingPageFragment : Fragment(R.layout.fragment_landing_page){
         characterDetailsViewModel.characterDetails.observe(viewLifecycleOwner) { character ->
             if (character != null) {
                 characterDetails = character
-//                landingPageView.visibility = View.VISIBLE
             } else {
                 Log.d("MCFragment", "character details is null")
             }

@@ -14,7 +14,7 @@ interface QuizScoreDao {
     @Query(
         "DELETE FROM QuizScoreEntity WHERE (score, timestamp) NOT IN (" +
                 "SELECT score, MAX(timestamp) FROM QuizScoreEntity WHERE score = (" +
-                "SELECT MAX(score) FROM QuizScoreEntity) GROUP BY score)"
+                "SELECT MAX(score) FROM QuizScoreEntity))"
     )
     suspend fun deleteAllExceptHighestScore()
 

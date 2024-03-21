@@ -58,7 +58,6 @@ class QuizQuestionMCFragment : Fragment(R.layout.fragment_quiz_question_mc){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        characterListViewModel.loadSWAPICharacters(1, listSize.last)
 
         planetsViewModel.loadSWAPIPlanets(1, 40)
         var planet = listOf<SWAPIPlanet>()
@@ -120,27 +119,14 @@ class QuizQuestionMCFragment : Fragment(R.layout.fragment_quiz_question_mc){
         tvChoice3.text = args.questionContents.answerChoices?.get(2) ?: "NO VALUE"
         tvChoice4.text = args.questionContents.answerChoices?.get(3) ?: "NO VALUE"
 
-//        characterListViewModel.characterResults.observe(viewLifecycleOwner) { CharacterList ->
-//            if (CharacterList != null) {
-//                characterList = CharacterList
-//            } else {
-//                Log.d("MCFragment", "character list is null")
-//            }
-//        }
 
         // Wait for both character and planet details to be loaded before starting the quiz
-//        val oldNextVisibility = nextButton.visibility
-//        val oldSubmitVisibility = submitButton.visibility
-//        nextButton.visibility = View.INVISIBLE
-//        submitButton.visibility = View.INVISIBLE
         characterDetailsViewModel.loading.observe(viewLifecycleOwner) { loading ->
             if (loading) {
                 planetDetailsViewModel.loading.observe(viewLifecycleOwner) { loading ->
                     if (loading) {
                         loadingIndicator.visibility = View.VISIBLE
                         MCPageView.visibility = View.INVISIBLE
-//                        nextButton.visibility = oldNextVisibility
-//                        submitButton.visibility = oldSubmitVisibility
                     } else {
                         loadingIndicator.visibility = View.INVISIBLE
                         MCPageView.visibility = View.VISIBLE
