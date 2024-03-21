@@ -280,7 +280,7 @@ class QuizQuestionMCFragment : Fragment(R.layout.fragment_quiz_question_mc){
                             nextScore,
                             "Who was Starkiller's master?",
                             people[4-1].name,
-                            listOf(people[4-1].name, people[11-1].name, people[10-1].name, people[4-1].name)
+                            listOf(people[1-1].name, people[11-1].name, people[10-1].name, people[4-1].name)
 
                         )
 
@@ -294,7 +294,7 @@ class QuizQuestionMCFragment : Fragment(R.layout.fragment_quiz_question_mc){
                             args.questionContents.quizNumber + 1,
                             nextScore,
                             "Who was the jedi that discovered Ahsoka?",
-                            people[58-1].name,
+                            people[58-2].name,
                             listOf(people[11-1].name, people[53-2].name, people[10-1].name, people[58-2].name)
 
                         )
@@ -309,7 +309,7 @@ class QuizQuestionMCFragment : Fragment(R.layout.fragment_quiz_question_mc){
                             args.questionContents.quizNumber + 1,
                             nextScore,
                             "Whose DNA was used to create the clone troopers?",
-                            people[69-1].name,
+                            people[69-2].name,
                             listOf(people[69-2].name, people[72-2].name, people[22-2].name, people[67-2].name)
 
                         )
@@ -324,7 +324,7 @@ class QuizQuestionMCFragment : Fragment(R.layout.fragment_quiz_question_mc){
                             args.questionContents.quizNumber + 1,
                             nextScore,
                             "Who was the only unaltered clone?",
-                            people[22-1].name,
+                            people[22-2].name,
                             listOf(people[69-2].name, people[72-2].name, people[22-2].name, people[67-2].name)
 
                         )
@@ -339,7 +339,7 @@ class QuizQuestionMCFragment : Fragment(R.layout.fragment_quiz_question_mc){
                             args.questionContents.quizNumber + 1,
                             nextScore,
                             "Who was Qui Gon Jinn's master?",
-                            people[67-1].name,
+                            people[67-2].name,
                             listOf(people[1-1].name, people[20-2].name, people[67-2].name, people[10-1].name)
 
                         )
@@ -384,7 +384,7 @@ class QuizQuestionMCFragment : Fragment(R.layout.fragment_quiz_question_mc){
                             args.questionContents.quizNumber + 1,
                             nextScore,
                             "Who inquired about the droid attack on the wookies?",
-                            people[52-1].name,
+                            people[52-2].name,
                             listOf(people[52-2].name, people[57-2].name, people[58-2].name, people[51-2].name)
 
                         )
@@ -399,7 +399,7 @@ class QuizQuestionMCFragment : Fragment(R.layout.fragment_quiz_question_mc){
                             args.questionContents.quizNumber + 1,
                             nextScore,
                             "Hello there",
-                            people[10-1].name,
+                            people[10-2].name,
                             listOf(people[79-2].name, people[11-1].name, people[1-1].name, people[10-1].name)
 
                         )
