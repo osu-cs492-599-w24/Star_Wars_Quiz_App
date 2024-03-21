@@ -66,6 +66,8 @@
     <color name="grey">#FF9E9E9E</color>
 
     <color name="sw_yellow">#FFE919</color>
+    <color name="sw_green">#96FFC2</color>
+    <color name="sw_red">#FF3B30</color>
     <color name="transparent">#00000000</color>
 
 </resources>
