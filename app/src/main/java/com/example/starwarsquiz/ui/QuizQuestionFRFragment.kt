@@ -11,8 +11,6 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.starwarsquiz.R
-import com.example.starwarsquiz.data.CharacterDetails
-import com.example.starwarsquiz.data.PlanetDetails
 import com.example.starwarsquiz.data.QuestionContents
 import com.example.starwarsquiz.data.SWAPICharacter
 import kotlin.random.Random
@@ -22,8 +20,6 @@ class QuizQuestionFRFragment : Fragment(R.layout.fragment_quiz_question_fr) {
     private val args: QuizQuestionFRFragmentArgs by navArgs()
 
     // declare necessary view models here
-    private val quizScoreViewModel: QuizScoreViewModel by viewModels()
-    private val characterListViewModel: SWAPICharacterViewModel by viewModels()
     private val characterDetailsViewModel: SWAPICharacterDetailsViewModel by viewModels()
     private val planetDetailsViewModel: SWAPIPlanetDetailsViewModel by viewModels()
 
@@ -37,9 +33,6 @@ class QuizQuestionFRFragment : Fragment(R.layout.fragment_quiz_question_fr) {
     private lateinit var submitButton: Button
     private lateinit var nextButton: Button
 
-    private var characterList: List<SWAPICharacter>? = null
-    private var characterDetails: CharacterDetails? = null
-    private var planetDetails: PlanetDetails? = null
     private var listSize = 1..50
     private val randomNumber = generateRandomNumber(listSize)
 
