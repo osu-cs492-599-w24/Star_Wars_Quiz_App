@@ -69,7 +69,6 @@ class QuizQuestionMCFragment : Fragment(R.layout.fragment_quiz_question_mc){
         val greenColor = ContextCompat.getColor(requireContext(), R.color.sw_green)
         val yellowColor = ContextCompat.getColor(requireContext(), R.color.sw_yellow)
         val greyColor = ContextCompat.getColor(requireContext(), R.color.grey)
-        val redColor = ContextCompat.getColor(requireContext(), R.color.sw_red)
 
         questionNumTV = view.findViewById(R.id.tv_quiz_question_num)
         currentScoreTV = view.findViewById(R.id.tv_quiz_current_score)
@@ -430,10 +429,10 @@ class QuizQuestionMCFragment : Fragment(R.layout.fragment_quiz_question_mc){
                 Log.d("QuizQuestionMCFragment", "No answer selected")
                 showCorrect = true
                 when (args.questionContents.correctAnswer) {
-                    tvChoice1.text.toString() -> tvChoice1.setBackgroundColor(redColor)
-                    tvChoice2.text.toString() -> tvChoice2.setBackgroundColor(redColor)
-                    tvChoice3.text.toString() -> tvChoice3.setBackgroundColor(redColor)
-                    tvChoice4.text.toString() -> tvChoice4.setBackgroundColor(redColor)
+                    tvChoice1.text.toString() -> tvChoice1.setBackgroundColor(greenColor)
+                    tvChoice2.text.toString() -> tvChoice2.setBackgroundColor(greenColor)
+                    tvChoice3.text.toString() -> tvChoice3.setBackgroundColor(greenColor)
+                    tvChoice4.text.toString() -> tvChoice4.setBackgroundColor(greenColor)
                 }
             }
         }
