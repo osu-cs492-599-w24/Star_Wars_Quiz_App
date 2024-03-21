@@ -30,10 +30,6 @@ class LandingPageFragment : Fragment(R.layout.fragment_landing_page){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.d("LandingPageFragment", "Random Num: ${randomNumber}")
-
-//        characterListViewModel.loadSWAPICharacters(1, listSize.last)
-
 
         startButton = view.findViewById(R.id.start_button)
         historyButton = view.findViewById(R.id.button_score_history)
@@ -80,17 +76,13 @@ class LandingPageFragment : Fragment(R.layout.fragment_landing_page){
             val newArgs = QuestionContents(
                 1,
                 0,
-                "What is the Homeworld of ${characterDetails?.name}",
-                "${planetDetails?.name}",
-                listOf("${planetDetails?.name}", "ANSWER 2", "ANSWER 3", "ANSWER 4")
+                "What planet is Darth Maul from?",
+                "Tattooine",
+                listOf("Tattooine", "Jeff", "Jeb", "Jeb!")
             )
-            Log.d("LandingPage", "name: ${characterDetails?.name} ")
-            Log.d("LandingPage", "homeworldID: ${characterDetails?.homeworldId}")
-            Log.d("LandingPage", "planetName: ${planetDetails?.name}")
             val action = LandingPageFragmentDirections.navigateToQuizQuestionMc(newArgs)
             findNavController().navigate(action)
         }
-
 
         historyButton.setOnClickListener {
             val action = LandingPageFragmentDirections.navigateToScoreHistory()

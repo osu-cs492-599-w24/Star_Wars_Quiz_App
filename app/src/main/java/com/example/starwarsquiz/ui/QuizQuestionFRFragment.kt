@@ -49,6 +49,8 @@ class QuizQuestionFRFragment : Fragment(R.layout.fragment_quiz_question_fr) {
         submitButton = view.findViewById(R.id.button_submit)
         nextButton = view.findViewById(R.id.button_next)
 
+        var showCorrect = false
+
         /*
             perform logic below
 
@@ -89,46 +91,83 @@ class QuizQuestionFRFragment : Fragment(R.layout.fragment_quiz_question_fr) {
 
         // Submit button goes to results screen
         submitButton.setOnClickListener {
-            val score = if (answerET.text.toString()
-                    .equals(args.questionContents.correctAnswer, ignoreCase = true)
-            ) {
-                // If answer is correct, increment score
-                args.questionContents.currentScore + 1
+            if (showCorrect) {
+                val score = if (answerET.text.toString()
+                        .equals(args.questionContents.correctAnswer, ignoreCase = true)
+                ) {
+                    // If answer is correct, increment score
+                    args.questionContents.currentScore + 1
+                } else {
+                    // If answer is incorrect, do not increment score
+                    args.questionContents.currentScore
+                }
+                val action = QuizQuestionFRFragmentDirections.navigateToQuizResults(score)
+                findNavController().navigate(action)
             } else {
-                // If answer is incorrect, do not increment score
-                args.questionContents.currentScore
+                // Lock the entry box and show the correct answer
+                // If it's correct, color it sw_green, if not, color it sw_red
+                answerET.isEnabled = false
+                answerET.setText(args.questionContents.correctAnswer)
+
+                answerET.setBackgroundResource(
+                    if (answerET.text.toString()
+                            .equals(args.questionContents.correctAnswer, ignoreCase = true)
+                    ) {
+                        R.color.sw_green
+                    } else {
+                        R.color.sw_red
+                    }
+                )
+
+                showCorrect = true
             }
-            val action = QuizQuestionFRFragmentDirections.navigateToQuizResults(score)
-            findNavController().navigate(action)
         }
 
         // Next button goes to next question
         nextButton.setOnClickListener {
             // Create new args to pass to next fragment
             // Args is the QuestionContents object with the updated score
+            if (showCorrect) {
+                Log.d("QuizQuestionFRFragment", "Next button clicked")
 
-            Log.d("QuizQuestionFRFragment", "Next button clicked")
+                // New score
+                val nextScore = if (answerET.text.toString()
+                        .equals(args.questionContents.correctAnswer, ignoreCase = true)
+                ) {
+                    // If answer is correct, increment score
+                    args.questionContents.currentScore + 1
+                } else {
+                    // If answer is incorrect, do not increment score
+                    args.questionContents.currentScore
+                }
 
-            // New score
-            val nextScore = if (answerET.text.toString()
-                    .equals(args.questionContents.correctAnswer, ignoreCase = true)
-            ) {
-                // If answer is correct, increment score
-                args.questionContents.currentScore + 1
+                val newArgs = QuestionContents(
+                    args.questionContents.quizNumber + 1,
+                    nextScore,
+                    "REPLACE ME WITH AN ACTUAL QUESTION",
+                    "ANSWER 1",
+                    listOf("ANSWER 1", "ANSWER 2", "ANSWER 3", "ANSWER 4")
+                )
+                val action = QuizQuestionFRFragmentDirections.navigateToQuizQuestionMc(newArgs)
+                findNavController().navigate(action)
             } else {
-                // If answer is incorrect, do not increment score
-                args.questionContents.currentScore
-            }
+                // Lock the entry box and show the correct answer
+                // If it's correct, color it sw_green, if not, color it sw_red
+                answerET.isEnabled = false
+                answerET.setText(args.questionContents.correctAnswer)
 
-            val newArgs = QuestionContents(
-                args.questionContents.quizNumber + 1,
-                nextScore,
-                "REPLACE ME WITH AN ACTUAL QUESTION",
-                "ANSWER 1",
-                listOf("ANSWER 1", "ANSWER 2", "ANSWER 3", "ANSWER 4")
-            )
-            val action = QuizQuestionFRFragmentDirections.navigateToQuizQuestionMc(newArgs)
-            findNavController().navigate(action)
+                answerET.setBackgroundResource(
+                    if (answerET.text.toString()
+                            .equals(args.questionContents.correctAnswer, ignoreCase = true)
+                    ) {
+                        R.color.sw_green
+                    } else {
+                        R.color.sw_red
+                    }
+                )
+
+                showCorrect = true
+            }
         }
     }
     override fun onResume() {

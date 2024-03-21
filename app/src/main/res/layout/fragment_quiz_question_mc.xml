@@ -1,6 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_margin="20dp">
 
@@ -78,10 +79,93 @@
             android:text="@string/question_1"
             android:layout_marginVertical="40dp"/>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_quiz_question_answers"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+        <!-- Horizontal linear layout for the answer options -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/mc_mc_answer1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                app:cardBackgroundColor="@color/sw_yellow">
+
+                <TextView
+                    android:id="@+id/tv_mc_answer1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/view_border"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="32dp"
+                    android:text="Unset!"
+                    android:textAppearance="?attr/textAppearanceHeadline5" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/mc_mc_answer2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp">
+
+                <TextView
+                    android:id="@+id/tv_mc_answer2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/view_border"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="32dp"
+                    android:text="Unset!"
+                    android:textAppearance="?attr/textAppearanceHeadline5" />
+
+            </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/mc_mc_answer3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                >
+
+                <TextView
+                    android:id="@+id/tv_mc_answer3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/view_border"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="32dp"
+                    android:text="Unset!"
+                    android:textAppearance="?attr/textAppearanceHeadline5" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/mc_mc_answer4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp">
+
+                <TextView
+                    android:id="@+id/tv_mc_answer4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/view_border"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="32dp"
+                    android:text="Unset!"
+                    android:textAppearance="?attr/textAppearanceHeadline5" />
+
+            </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
 
     </LinearLayout>
 
